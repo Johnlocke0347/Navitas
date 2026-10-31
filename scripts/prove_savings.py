@@ -76,38 +76,33 @@ def tariff_config(which: str):
         }
 
 def _check_clean_or_die():
-    # audit requires clean tree BEFORE any run: no staged or unstaged changes to tracked files
-    # (untracked files in results/ are allowed as they are outputs)
+    # audit requires clean tree BEFORE any run: no staged or unstaged changes to tracked files outside results/
+    # results/ is allowed to be dirty (new outputs) as we append during batch
     try:
-        # check staged
-        subprocess.check_call(["git","diff","--cached","--quiet"], cwd=ROOT)
-        # check unstaged
-        subprocess.check_call(["git","diff","--quiet"], cwd=ROOT)
+        subprocess.check_call(["git","diff","--cached","--quiet","--", ".", ":!results"], cwd=ROOT)
+        subprocess.check_call(["git","diff","--quiet","--", ".", ":!results"], cwd=ROOT)
     except subprocess.CalledProcessError:
         print("ERROR: git tree is dirty — commit everything before running prove_savings.py (audit requires clean status).", file=sys.stderr)
         print("Run `git status` and commit or stash changes.", file=sys.stderr)
-        print("Hint: `git diff` or `git diff --cached` shows changes to tracked files.", file=sys.stderr)
+        print("Hint: `git diff -- . :!results` shows changes to tracked files outside results/.", file=sys.stderr)
         sys.exit(2)
-    # also check for untracked files that are not in results/ or ignored
+    # also check for untracked files outside results/ (results/ untracked is allowed as output)
     try:
         out = subprocess.check_output(["git","status","--porcelain","--untracked-files=all"], cwd=ROOT).decode()
-        # filter out ignored and expected untracked in results/ (new runs) and navitas_real_data/ etc are now ignored
         bad = []
         for line in out.splitlines():
             if line.startswith("??"):
                 path = line[3:].strip()
-                # allow untracked in results/ as they are outputs (but they should be committed after run, not before)
-                # For pre-run check, we want clean, so even untracked in results/ should be considered dirty before run
-                # So if there are untracked files in results/ before run, that's dirty (should have been committed)
+                if path.startswith("results/"):
+                    continue
                 bad.append(path)
         if bad:
-            print(f"ERROR: untracked files present: {bad} — commit or gitignore before run.", file=sys.stderr)
+            print(f"ERROR: untracked files present outside results/: {bad} — commit or gitignore before run.", file=sys.stderr)
             sys.exit(2)
     except Exception:
         pass
 
 def run_one(cap: int, seed: int, which: str, timelimit: float = 120.0, workers: int = 1):
-    _check_clean_or_die()
     utc = datetime.datetime.utcnow().isoformat() + "Z"
     git_commit, git_dirty = git_info()
     py_ver, ort_ver = py_and_ortools()
@@ -238,6 +233,7 @@ def main():
     ap.add_argument("--all", action="store_true", help="run full matrix cap {1000,1060,1100} x seeds {7,11,23} x tariffs {pk,mibel}")
     args=ap.parse_args()
     if args.all or (args.cap is None and args.seed is None and args.tariff is None):
+        _check_clean_or_die()
         caps=[1000,1060,1100]
         seeds=[7,11,23]
         tariffs=["pk","mibel"]
@@ -248,6 +244,7 @@ def main():
                     print(f"\n=== RUN cap={cap} seed={seed} tariff={which} ===", flush=True)
                     run_one(cap, seed, which, timelimit=args.timelimit)
     else:
+        _check_clean_or_die()
         cap=args.cap if args.cap is not None else 1060
         seed=args.seed if args.seed is not None else 7
         which=args.tariff if args.tariff is not None else "pk"
