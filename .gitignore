@@ -1,0 +1,17 @@
+# Secrets
+.env
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.vscode/
+
+# Data (gitignored, see DATA_SOURCES.md for provenance)
+data/
+
+# Results ignore raw CSV/JSON but keep markdown
+# results/*.csv
+# results/*.json
+
+# Logs
+logs/calls.jsonl
