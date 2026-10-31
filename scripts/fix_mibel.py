@@ -28,6 +28,21 @@ success_count=0
 for cap in caps:
     for seed in seeds:
         tariff="mibel"
+        # skip if already have 150 run (avoid duplicates after restart)
+        if last_run_status(cap, seed, tariff, 150) is not None:
+            j_existing = last_run_status(cap, seed, tariff, 150)
+            print(f"Skipping cap={cap} seed={seed} mibel 150s already logged status={j_existing.get('stage2_info',{}).get('status')} success={j_existing.get('success')}")
+            if j_existing.get('success'):
+                success_count+=1
+            # still check if needs retry 240
+            if j_existing.get('stage2_info',{}).get('status')=="UNKNOWN" or not j_existing.get('success'):
+                if last_run_status(cap, seed, tariff, 240) is None:
+                    print(f"    UNKNOWN -> retrying with 240s (skipped earlier)")
+                    run_one(cap, seed, tariff, 240)
+                    j2=last_run_status(cap, seed, tariff, 240)
+                    if j2 and j2.get('success'):
+                        success_count+=1
+            continue
         # first attempt 150
         run_one(cap, seed, tariff, 150)
         # check last run
