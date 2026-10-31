@@ -1,0 +1,1501 @@
+﻿Running full matrix: caps=[1000, 1060, 1100] seeds=[7, 11, 23] tariffs=['pk', 'mibel'] timelimit=30.0
+
+=== RUN cap=1000 seed=7 tariff=pk ===
+python : D:\Navitas-new\scripts\prove_savings.py:79: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in 
+a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+At line:1 char:32
++ ... vitas-new'; python scripts/prove_savings.py --all --timelimit 30 2>&1 ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (D:\Navitas-new\...(datetime.UTC).:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  utc = datetime.datetime.utcnow().isoformat() + "Z"
+FAIL cap=1000 seed=7 tariff=pk error=stage2 infeasible
+{
+  "utc": "2026-10-31T21:04:24.846565Z",
+  "git_commit": "bd4c2fe7d42a5ef7d8b71fdc3471d89c6abb018d",
+  "git_dirty": true,
+  "python_version": "3.12.10",
+  "ortools_version": "9.15.6755",
+  "cpu_count": 8,
+  "input_sha256": "5cecb2eb95437d6b789726f302860cefb446731af9eadba2a8379af5644ed169",
+  "engine_shas": {
+    "load.py": "7b30a77c24bfefc19083c472ba55c325363d19a1cd8abf07d9be73729d11238c",
+    "engine.py": "bf6ccf5a9d17bfe77358ca650f1ccbc795867894fb1b247aa272b922a571bc73",
+    "solve2.py": "be4e3fc9995a75013e021f6fd99d7e13ff68aa86c3ff6eb7231858eed2309141",
+    "run3.py": "cdbc5ad6fb0cef02567b649cff646520c92b7a270de05bec9b105b9974e95b69"
+  },
+  "params": {
+    "cap": 1000,
+    "time_limit": 30.0,
+    "workers": 1,
+    "seed_assign": 7,
+    "seed_solver": 3,
+    "tariff": "pk"
+  },
+  "tariff_config": {
+    "tariff_name": {
+      "value": "pk",
+      "verified": true,
+      "note": "Pakistan TOU illustrative"
+    },
+    "B2_peak_Rs_per_kWh": {
+      "value": 35.68,
+      "verified": "news_only",
+      "note": "Dawn 1973828, NEPRA Feb 2026"
+    },
+    "B2_offpeak_Rs_per_kWh": {
+      "value": 22.83,
+      "verified": "news_only",
+      "note": "Dawn 1973828"
+    },
+    "peak_window": {
+      "value": "18:30-22:30 (138-186 per day, DAY=192)",
+      "verified": false,
+      "note": "UNVERIFIED"
+    },
+    "export_price_Rs_per_kWh": {
+      "value": 8.13,
+      "verified": false,
+      "note": "UNVERIFIED"
+    },
+    "demand_fixed_Rs_per_kW": {
+      "value": 1250,
+      "verified": "news_only",
+      "note": "Dawn report"
+    }
+  },
+  "baseline": {
+    "cost": 33631.652969999996,
+    "kwh": 1315.709,
+    "viol": 0
+  },
+  "stage1_counts": {
+    "Ironing TM1": 45,
+    "Ironing TM4": 26,
+    "Harden[1] TM1": 62,
+    "Harden[1] TM5": 4,
+    "Harden[0.5] TM4": 26,
+    "Harden[1.5] TM3": 8,
+    "Sublimation TM3": 40,
+    "Anti-Shrinkage TM2": 61,
+    "Harden[2] TM1": 3
+  },
+  "modes_only": {
+    "cost": 25871.252930000002,
+    "kwh": 1007.471,
+    "viol": 0
+  },
+  "success": false,
+  "error": "stage2 infeasible",
+  "stage2_info": {
+    "status": "UNKNOWN",
+    "wall": 33.9
+  },
+  "schedule_path": null,
+  "schedule_sha256": null,
+  "traceback": "Traceback (most recent call last):\n  File \"D:\\Navitas-new\\scripts\\prove_savings.py\", line 147, in run_one\n    raise RuntimeError(\"stage2 infeasible\")\nRuntimeError: stage2 infeasible\n"
+}
+
+=== RUN cap=1000 seed=7 tariff=mibel ===
+D:\Navitas-new\scripts\prove_savings.py:79: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future 
+version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  utc = datetime.datetime.utcnow().isoformat() + "Z"
+FAIL cap=1000 seed=7 tariff=mibel error=stage2 infeasible
+{
+  "utc": "2026-10-31T21:05:07.158382Z",
+  "git_commit": "bd4c2fe7d42a5ef7d8b71fdc3471d89c6abb018d",
+  "git_dirty": true,
+  "python_version": "3.12.10",
+  "ortools_version": "9.15.6755",
+  "cpu_count": 8,
+  "input_sha256": "5cecb2eb95437d6b789726f302860cefb446731af9eadba2a8379af5644ed169",
+  "engine_shas": {
+    "load.py": "7b30a77c24bfefc19083c472ba55c325363d19a1cd8abf07d9be73729d11238c",
+    "engine.py": "bf6ccf5a9d17bfe77358ca650f1ccbc795867894fb1b247aa272b922a571bc73",
+    "solve2.py": "be4e3fc9995a75013e021f6fd99d7e13ff68aa86c3ff6eb7231858eed2309141",
+    "run3.py": "cdbc5ad6fb0cef02567b649cff646520c92b7a270de05bec9b105b9974e95b69"
+  },
+  "params": {
+    "cap": 1000,
+    "time_limit": 30.0,
+    "workers": 1,
+    "seed_assign": 7,
+    "seed_solver": 3,
+    "tariff": "mibel"
+  },
+  "tariff_config": {
+    "tariff_name": {
+      "value": "mibel",
+      "verified": true,
+      "note": "dataset energy_sources[0].price EUR/Wh"
+    },
+    "price_source": {
+      "value": "P_MIBEL from Input JSON (EUR per Wh)",
+      "verified": true,
+      "note": "dataset file"
+    },
+    "peak_window": {
+      "value": "none",
+      "verified": true,
+      "note": "MIBEL uses dataset prices, no TOU window"
+    },
+    "export_price": {
+      "value": "N/A",
+      "verified": true,
+      "note": "MIBEL scenario no PV"
+    }
+  },
+  "baseline": {
+    "cost": 87.68362445,
+    "kwh": 1315.709,
+    "viol": 0
+  },
+  "stage1_counts": {
+    "Ironing TM1": 45,
+    "Ironing TM4": 26,
+    "Harden[1] TM1": 62,
+    "Harden[1] TM5": 4,
+    "Harden[0.5] TM4": 26,
+    "Harden[1.5] TM3": 8,
+    "Sublimation TM3": 40,
+    "Anti-Shrinkage TM2": 61,
+    "Harden[2] TM1": 3
+  },
+  "modes_only": {
+    "cost": 67.28346023,
+    "kwh": 1007.471,
+    "viol": 0
+  },
+  "success": false,
+  "error": "stage2 infeasible",
+  "stage2_info": {
+    "status": "UNKNOWN",
+    "wall": 36.2
+  },
+  "schedule_path": null,
+  "schedule_sha256": null,
+  "traceback": "Traceback (most recent call last):\n  File \"D:\\Navitas-new\\scripts\\prove_savings.py\", line 147, in run_one\n    raise RuntimeError(\"stage2 infeasible\")\nRuntimeError: stage2 infeasible\n"
+}
+
+=== RUN cap=1000 seed=11 tariff=pk ===
+FAIL cap=1000 seed=11 tariff=pk error=stage2 infeasible
+{
+  "utc": "2026-10-31T21:05:50.915809Z",
+  "git_commit": "bd4c2fe7d42a5ef7d8b71fdc3471d89c6abb018d",
+  "git_dirty": true,
+  "python_version": "3.12.10",
+  "ortools_version": "9.15.6755",
+  "cpu_count": 8,
+  "input_sha256": "5cecb2eb95437d6b789726f302860cefb446731af9eadba2a8379af5644ed169",
+  "engine_shas": {
+    "load.py": "7b30a77c24bfefc19083c472ba55c325363d19a1cd8abf07d9be73729d11238c",
+    "engine.py": "bf6ccf5a9d17bfe77358ca650f1ccbc795867894fb1b247aa272b922a571bc73",
+    "solve2.py": "be4e3fc9995a75013e021f6fd99d7e13ff68aa86c3ff6eb7231858eed2309141",
+    "run3.py": "cdbc5ad6fb0cef02567b649cff646520c92b7a270de05bec9b105b9974e95b69"
+  },
+  "params": {
+    "cap": 1000,
+    "time_limit": 30.0,
+    "workers": 1,
+    "seed_assign": 11,
+    "seed_solver": 3,
+    "tariff": "pk"
+  },
+  "tariff_config": {
+    "tariff_name": {
+      "value": "pk",
+      "verified": true,
+      "note": "Pakistan TOU illustrative"
+    },
+    "B2_peak_Rs_per_kWh": {
+      "value": 35.68,
+      "verified": "news_only",
+      "note": "Dawn 1973828, NEPRA Feb 2026"
+    },
+    "B2_offpeak_Rs_per_kWh": {
+      "value": 22.83,
+      "verified": "news_only",
+      "note": "Dawn 1973828"
+    },
+    "peak_window": {
+      "value": "18:30-22:30 (138-186 per day, DAY=192)",
+      "verified": false,
+      "note": "UNVERIFIED"
+    },
+    "export_price_Rs_per_kWh": {
+      "value": 8.13,
+      "verified": false,
+      "note": "UNVERIFIED"
+    },
+    "demand_fixed_Rs_per_kW": {
+      "value": 1250,
+      "verified": "news_only",
+      "note": "Dawn report"
+    }
+  },
+  "baseline": {
+    "cost": 33631.652969999996,
+    "kwh": 1315.709,
+    "viol": 0
+  },
+  "stage1_counts": {
+    "Ironing TM1": 45,
+    "Ironing TM4": 26,
+    "Harden[1] TM1": 62,
+    "Harden[1] TM5": 4,
+    "Harden[0.5] TM4": 26,
+    "Harden[1.5] TM3": 8,
+    "Sublimation TM3": 40,
+    "Anti-Shrinkage TM2": 61,
+    "Harden[2] TM1": 3
+  },
+  "modes_only": {
+    "cost": 25584.53088,
+    "kwh": 1007.471,
+    "viol": 0
+  },
+  "success": false,
+  "error": "stage2 infeasible",
+  "stage2_info": {
+    "status": "UNKNOWN",
+    "wall": 36.6
+  },
+  "schedule_path": null,
+  "schedule_sha256": null,
+  "traceback": "Traceback (most recent call last):\n  File \"D:\\Navitas-new\\scripts\\prove_savings.py\", line 147, in run_one\n    raise RuntimeError(\"stage2 infeasible\")\nRuntimeError: stage2 infeasible\n"
+}
+
+=== RUN cap=1000 seed=11 tariff=mibel ===
+FAIL cap=1000 seed=11 tariff=mibel error=stage2 infeasible
+{
+  "utc": "2026-10-31T21:06:34.803529Z",
+  "git_commit": "bd4c2fe7d42a5ef7d8b71fdc3471d89c6abb018d",
+  "git_dirty": true,
+  "python_version": "3.12.10",
+  "ortools_version": "9.15.6755",
+  "cpu_count": 8,
+  "input_sha256": "5cecb2eb95437d6b789726f302860cefb446731af9eadba2a8379af5644ed169",
+  "engine_shas": {
+    "load.py": "7b30a77c24bfefc19083c472ba55c325363d19a1cd8abf07d9be73729d11238c",
+    "engine.py": "bf6ccf5a9d17bfe77358ca650f1ccbc795867894fb1b247aa272b922a571bc73",
+    "solve2.py": "be4e3fc9995a75013e021f6fd99d7e13ff68aa86c3ff6eb7231858eed2309141",
+    "run3.py": "cdbc5ad6fb0cef02567b649cff646520c92b7a270de05bec9b105b9974e95b69"
+  },
+  "params": {
+    "cap": 1000,
+    "time_limit": 30.0,
+    "workers": 1,
+    "seed_assign": 11,
+    "seed_solver": 3,
+    "tariff": "mibel"
+  },
+  "tariff_config": {
+    "tariff_name": {
+      "value": "mibel",
+      "verified": true,
+      "note": "dataset energy_sources[0].price EUR/Wh"
+    },
+    "price_source": {
+      "value": "P_MIBEL from Input JSON (EUR per Wh)",
+      "verified": true,
+      "note": "dataset file"
+    },
+    "peak_window": {
+      "value": "none",
+      "verified": true,
+      "note": "MIBEL uses dataset prices, no TOU window"
+    },
+    "export_price": {
+      "value": "N/A",
+      "verified": true,
+      "note": "MIBEL scenario no PV"
+    }
+  },
+  "baseline": {
+    "cost": 87.68362445,
+    "kwh": 1315.709,
+    "viol": 0
+  },
+  "stage1_counts": {
+    "Ironing TM1": 45,
+    "Ironing TM4": 26,
+    "Harden[1] TM1": 62,
+    "Harden[1] TM5": 4,
+    "Harden[0.5] TM4": 26,
+    "Harden[1.5] TM3": 8,
+    "Sublimation TM3": 40,
+    "Anti-Shrinkage TM2": 61,
+    "Harden[2] TM1": 3
+  },
+  "modes_only": {
+    "cost": 67.35523839,
+    "kwh": 1007.471,
+    "viol": 0
+  },
+  "success": false,
+  "error": "stage2 infeasible",
+  "stage2_info": {
+    "status": "UNKNOWN",
+    "wall": 22.9
+  },
+  "schedule_path": null,
+  "schedule_sha256": null,
+  "traceback": "Traceback (most recent call last):\n  File \"D:\\Navitas-new\\scripts\\prove_savings.py\", line 147, in run_one\n    raise RuntimeError(\"stage2 infeasible\")\nRuntimeError: stage2 infeasible\n"
+}
+
+=== RUN cap=1000 seed=23 tariff=pk ===
+FAIL cap=1000 seed=23 tariff=pk error=stage2 infeasible
+{
+  "utc": "2026-10-31T21:07:07.520004Z",
+  "git_commit": "bd4c2fe7d42a5ef7d8b71fdc3471d89c6abb018d",
+  "git_dirty": true,
+  "python_version": "3.12.10",
+  "ortools_version": "9.15.6755",
+  "cpu_count": 8,
+  "input_sha256": "5cecb2eb95437d6b789726f302860cefb446731af9eadba2a8379af5644ed169",
+  "engine_shas": {
+    "load.py": "7b30a77c24bfefc19083c472ba55c325363d19a1cd8abf07d9be73729d11238c",
+    "engine.py": "bf6ccf5a9d17bfe77358ca650f1ccbc795867894fb1b247aa272b922a571bc73",
+    "solve2.py": "be4e3fc9995a75013e021f6fd99d7e13ff68aa86c3ff6eb7231858eed2309141",
+    "run3.py": "cdbc5ad6fb0cef02567b649cff646520c92b7a270de05bec9b105b9974e95b69"
+  },
+  "params": {
+    "cap": 1000,
+    "time_limit": 30.0,
+    "workers": 1,
+    "seed_assign": 23,
+    "seed_solver": 3,
+    "tariff": "pk"
+  },
+  "tariff_config": {
+    "tariff_name": {
+      "value": "pk",
+      "verified": true,
+      "note": "Pakistan TOU illustrative"
+    },
+    "B2_peak_Rs_per_kWh": {
+      "value": 35.68,
+      "verified": "news_only",
+      "note": "Dawn 1973828, NEPRA Feb 2026"
+    },
+    "B2_offpeak_Rs_per_kWh": {
+      "value": 22.83,
+      "verified": "news_only",
+      "note": "Dawn 1973828"
+    },
+    "peak_window": {
+      "value": "18:30-22:30 (138-186 per day, DAY=192)",
+      "verified": false,
+      "note": "UNVERIFIED"
+    },
+    "export_price_Rs_per_kWh": {
+      "value": 8.13,
+      "verified": false,
+      "note": "UNVERIFIED"
+    },
+    "demand_fixed_Rs_per_kW": {
+      "value": 1250,
+      "verified": "news_only",
+      "note": "Dawn report"
+    }
+  },
+  "baseline": {
+    "cost": 33631.652969999996,
+    "kwh": 1315.709,
+    "viol": 0
+  },
+  "stage1_counts": {
+    "Ironing TM1": 45,
+    "Ironing TM4": 26,
+    "Harden[1] TM1": 62,
+    "Harden[1] TM5": 4,
+    "Harden[0.5] TM4": 26,
+    "Harden[1.5] TM3": 8,
+    "Sublimation TM3": 40,
+    "Anti-Shrinkage TM2": 61,
+    "Harden[2] TM1": 3
+  },
+  "modes_only": {
+    "cost": 25813.28658,
+    "kwh": 1007.471,
+    "viol": 0
+  },
+  "success": false,
+  "error": "stage2 infeasible",
+  "stage2_info": {
+    "status": "UNKNOWN",
+    "wall": 29.7
+  },
+  "schedule_path": null,
+  "schedule_sha256": null,
+  "traceback": "Traceback (most recent call last):\n  File \"D:\\Navitas-new\\scripts\\prove_savings.py\", line 147, in run_one\n    raise RuntimeError(\"stage2 infeasible\")\nRuntimeError: stage2 infeasible\n"
+}
+
+=== RUN cap=1000 seed=23 tariff=mibel ===
+FAIL cap=1000 seed=23 tariff=mibel error=stage2 infeasible
+{
+  "utc": "2026-10-31T21:07:46.604332Z",
+  "git_commit": "bd4c2fe7d42a5ef7d8b71fdc3471d89c6abb018d",
+  "git_dirty": true,
+  "python_version": "3.12.10",
+  "ortools_version": "9.15.6755",
+  "cpu_count": 8,
+  "input_sha256": "5cecb2eb95437d6b789726f302860cefb446731af9eadba2a8379af5644ed169",
+  "engine_shas": {
+    "load.py": "7b30a77c24bfefc19083c472ba55c325363d19a1cd8abf07d9be73729d11238c",
+    "engine.py": "bf6ccf5a9d17bfe77358ca650f1ccbc795867894fb1b247aa272b922a571bc73",
+    "solve2.py": "be4e3fc9995a75013e021f6fd99d7e13ff68aa86c3ff6eb7231858eed2309141",
+    "run3.py": "cdbc5ad6fb0cef02567b649cff646520c92b7a270de05bec9b105b9974e95b69"
+  },
+  "params": {
+    "cap": 1000,
+    "time_limit": 30.0,
+    "workers": 1,
+    "seed_assign": 23,
+    "seed_solver": 3,
+    "tariff": "mibel"
+  },
+  "tariff_config": {
+    "tariff_name": {
+      "value": "mibel",
+      "verified": true,
+      "note": "dataset energy_sources[0].price EUR/Wh"
+    },
+    "price_source": {
+      "value": "P_MIBEL from Input JSON (EUR per Wh)",
+      "verified": true,
+      "note": "dataset file"
+    },
+    "peak_window": {
+      "value": "none",
+      "verified": true,
+      "note": "MIBEL uses dataset prices, no TOU window"
+    },
+    "export_price": {
+      "value": "N/A",
+      "verified": true,
+      "note": "MIBEL scenario no PV"
+    }
+  },
+  "baseline": {
+    "cost": 87.68362445,
+    "kwh": 1315.709,
+    "viol": 0
+  },
+  "stage1_counts": {
+    "Ironing TM1": 45,
+    "Ironing TM4": 26,
+    "Harden[1] TM1": 62,
+    "Harden[1] TM5": 4,
+    "Harden[0.5] TM4": 26,
+    "Harden[1.5] TM3": 8,
+    "Sublimation TM3": 40,
+    "Anti-Shrinkage TM2": 61,
+    "Harden[2] TM1": 3
+  },
+  "modes_only": {
+    "cost": 67.20598448,
+    "kwh": 1007.471,
+    "viol": 0
+  },
+  "success": false,
+  "error": "stage2 infeasible",
+  "stage2_info": {
+    "status": "UNKNOWN",
+    "wall": 35.3
+  },
+  "schedule_path": null,
+  "schedule_sha256": null,
+  "traceback": "Traceback (most recent call last):\n  File \"D:\\Navitas-new\\scripts\\prove_savings.py\", line 147, in run_one\n    raise RuntimeError(\"stage2 infeasible\")\nRuntimeError: stage2 infeasible\n"
+}
+
+=== RUN cap=1060 seed=7 tariff=pk ===
+FAIL cap=1060 seed=7 tariff=pk error=stage2 infeasible
+{
+  "utc": "2026-10-31T21:08:29.305419Z",
+  "git_commit": "bd4c2fe7d42a5ef7d8b71fdc3471d89c6abb018d",
+  "git_dirty": true,
+  "python_version": "3.12.10",
+  "ortools_version": "9.15.6755",
+  "cpu_count": 8,
+  "input_sha256": "5cecb2eb95437d6b789726f302860cefb446731af9eadba2a8379af5644ed169",
+  "engine_shas": {
+    "load.py": "7b30a77c24bfefc19083c472ba55c325363d19a1cd8abf07d9be73729d11238c",
+    "engine.py": "bf6ccf5a9d17bfe77358ca650f1ccbc795867894fb1b247aa272b922a571bc73",
+    "solve2.py": "be4e3fc9995a75013e021f6fd99d7e13ff68aa86c3ff6eb7231858eed2309141",
+    "run3.py": "cdbc5ad6fb0cef02567b649cff646520c92b7a270de05bec9b105b9974e95b69"
+  },
+  "params": {
+    "cap": 1060,
+    "time_limit": 30.0,
+    "workers": 1,
+    "seed_assign": 7,
+    "seed_solver": 3,
+    "tariff": "pk"
+  },
+  "tariff_config": {
+    "tariff_name": {
+      "value": "pk",
+      "verified": true,
+      "note": "Pakistan TOU illustrative"
+    },
+    "B2_peak_Rs_per_kWh": {
+      "value": 35.68,
+      "verified": "news_only",
+      "note": "Dawn 1973828, NEPRA Feb 2026"
+    },
+    "B2_offpeak_Rs_per_kWh": {
+      "value": 22.83,
+      "verified": "news_only",
+      "note": "Dawn 1973828"
+    },
+    "peak_window": {
+      "value": "18:30-22:30 (138-186 per day, DAY=192)",
+      "verified": false,
+      "note": "UNVERIFIED"
+    },
+    "export_price_Rs_per_kWh": {
+      "value": 8.13,
+      "verified": false,
+      "note": "UNVERIFIED"
+    },
+    "demand_fixed_Rs_per_kW": {
+      "value": 1250,
+      "verified": "news_only",
+      "note": "Dawn report"
+    }
+  },
+  "baseline": {
+    "cost": 33631.652969999996,
+    "kwh": 1315.709,
+    "viol": 0
+  },
+  "stage1_counts": {
+    "Ironing TM1": 52,
+    "Ironing TM4": 19,
+    "Harden[1] TM1": 66,
+    "Harden[0.5] TM4": 26,
+    "Harden[1.5] TM3": 8,
+    "Sublimation TM3": 40,
+    "Anti-Shrinkage TM2": 61,
+    "Harden[2] TM1": 3
+  },
+  "modes_only": {
+    "cost": 23591.20398,
+    "kwh": 923.891,
+    "viol": 1
+  },
+  "success": false,
+  "error": "stage2 infeasible",
+  "stage2_info": {
+    "status": "UNKNOWN",
+    "wall": 32.4
+  },
+  "schedule_path": null,
+  "schedule_sha256": null,
+  "traceback": "Traceback (most recent call last):\n  File \"D:\\Navitas-new\\scripts\\prove_savings.py\", line 147, in run_one\n    raise RuntimeError(\"stage2 infeasible\")\nRuntimeError: stage2 infeasible\n"
+}
+
+=== RUN cap=1060 seed=7 tariff=mibel ===
+FAIL cap=1060 seed=7 tariff=mibel error=stage2 infeasible
+{
+  "utc": "2026-10-31T21:09:09.298502Z",
+  "git_commit": "bd4c2fe7d42a5ef7d8b71fdc3471d89c6abb018d",
+  "git_dirty": true,
+  "python_version": "3.12.10",
+  "ortools_version": "9.15.6755",
+  "cpu_count": 8,
+  "input_sha256": "5cecb2eb95437d6b789726f302860cefb446731af9eadba2a8379af5644ed169",
+  "engine_shas": {
+    "load.py": "7b30a77c24bfefc19083c472ba55c325363d19a1cd8abf07d9be73729d11238c",
+    "engine.py": "bf6ccf5a9d17bfe77358ca650f1ccbc795867894fb1b247aa272b922a571bc73",
+    "solve2.py": "be4e3fc9995a75013e021f6fd99d7e13ff68aa86c3ff6eb7231858eed2309141",
+    "run3.py": "cdbc5ad6fb0cef02567b649cff646520c92b7a270de05bec9b105b9974e95b69"
+  },
+  "params": {
+    "cap": 1060,
+    "time_limit": 30.0,
+    "workers": 1,
+    "seed_assign": 7,
+    "seed_solver": 3,
+    "tariff": "mibel"
+  },
+  "tariff_config": {
+    "tariff_name": {
+      "value": "mibel",
+      "verified": true,
+      "note": "dataset energy_sources[0].price EUR/Wh"
+    },
+    "price_source": {
+      "value": "P_MIBEL from Input JSON (EUR per Wh)",
+      "verified": true,
+      "note": "dataset file"
+    },
+    "peak_window": {
+      "value": "none",
+      "verified": true,
+      "note": "MIBEL uses dataset prices, no TOU window"
+    },
+    "export_price": {
+      "value": "N/A",
+      "verified": true,
+      "note": "MIBEL scenario no PV"
+    }
+  },
+  "baseline": {
+    "cost": 87.68362445,
+    "kwh": 1315.709,
+    "viol": 0
+  },
+  "stage1_counts": {
+    "Ironing TM1": 52,
+    "Ironing TM4": 19,
+    "Harden[1] TM1": 66,
+    "Harden[0.5] TM4": 26,
+    "Harden[1.5] TM3": 8,
+    "Sublimation TM3": 40,
+    "Anti-Shrinkage TM2": 61,
+    "Harden[2] TM1": 3
+  },
+  "modes_only": {
+    "cost": 61.66597362,
+    "kwh": 923.891,
+    "viol": 1
+  },
+  "success": false,
+  "error": "stage2 infeasible",
+  "stage2_info": {
+    "status": "UNKNOWN",
+    "wall": 35.8
+  },
+  "schedule_path": null,
+  "schedule_sha256": null,
+  "traceback": "Traceback (most recent call last):\n  File \"D:\\Navitas-new\\scripts\\prove_savings.py\", line 147, in run_one\n    raise RuntimeError(\"stage2 infeasible\")\nRuntimeError: stage2 infeasible\n"
+}
+
+=== RUN cap=1060 seed=11 tariff=pk ===
+FAIL cap=1060 seed=11 tariff=pk error=stage2 infeasible
+{
+  "utc": "2026-10-31T21:09:52.861530Z",
+  "git_commit": "bd4c2fe7d42a5ef7d8b71fdc3471d89c6abb018d",
+  "git_dirty": true,
+  "python_version": "3.12.10",
+  "ortools_version": "9.15.6755",
+  "cpu_count": 8,
+  "input_sha256": "5cecb2eb95437d6b789726f302860cefb446731af9eadba2a8379af5644ed169",
+  "engine_shas": {
+    "load.py": "7b30a77c24bfefc19083c472ba55c325363d19a1cd8abf07d9be73729d11238c",
+    "engine.py": "bf6ccf5a9d17bfe77358ca650f1ccbc795867894fb1b247aa272b922a571bc73",
+    "solve2.py": "be4e3fc9995a75013e021f6fd99d7e13ff68aa86c3ff6eb7231858eed2309141",
+    "run3.py": "cdbc5ad6fb0cef02567b649cff646520c92b7a270de05bec9b105b9974e95b69"
+  },
+  "params": {
+    "cap": 1060,
+    "time_limit": 30.0,
+    "workers": 1,
+    "seed_assign": 11,
+    "seed_solver": 3,
+    "tariff": "pk"
+  },
+  "tariff_config": {
+    "tariff_name": {
+      "value": "pk",
+      "verified": true,
+      "note": "Pakistan TOU illustrative"
+    },
+    "B2_peak_Rs_per_kWh": {
+      "value": 35.68,
+      "verified": "news_only",
+      "note": "Dawn 1973828, NEPRA Feb 2026"
+    },
+    "B2_offpeak_Rs_per_kWh": {
+      "value": 22.83,
+      "verified": "news_only",
+      "note": "Dawn 1973828"
+    },
+    "peak_window": {
+      "value": "18:30-22:30 (138-186 per day, DAY=192)",
+      "verified": false,
+      "note": "UNVERIFIED"
+    },
+    "export_price_Rs_per_kWh": {
+      "value": 8.13,
+      "verified": false,
+      "note": "UNVERIFIED"
+    },
+    "demand_fixed_Rs_per_kW": {
+      "value": 1250,
+      "verified": "news_only",
+      "note": "Dawn report"
+    }
+  },
+  "baseline": {
+    "cost": 33631.652969999996,
+    "kwh": 1315.709,
+    "viol": 0
+  },
+  "stage1_counts": {
+    "Ironing TM1": 52,
+    "Ironing TM4": 19,
+    "Harden[1] TM1": 66,
+    "Harden[0.5] TM4": 26,
+    "Harden[1.5] TM3": 8,
+    "Sublimation TM3": 40,
+    "Anti-Shrinkage TM2": 61,
+    "Harden[2] TM1": 3
+  },
+  "modes_only": {
+    "cost": 23466.61038,
+    "kwh": 923.891,
+    "viol": 1
+  },
+  "success": false,
+  "error": "stage2 infeasible",
+  "stage2_info": {
+    "status": "UNKNOWN",
+    "wall": 31.1
+  },
+  "schedule_path": null,
+  "schedule_sha256": null,
+  "traceback": "Traceback (most recent call last):\n  File \"D:\\Navitas-new\\scripts\\prove_savings.py\", line 147, in run_one\n    raise RuntimeError(\"stage2 infeasible\")\nRuntimeError: stage2 infeasible\n"
+}
+
+=== RUN cap=1060 seed=11 tariff=mibel ===
+FAIL cap=1060 seed=11 tariff=mibel error=stage2 infeasible
+{
+  "utc": "2026-10-31T21:10:31.644886Z",
+  "git_commit": "bd4c2fe7d42a5ef7d8b71fdc3471d89c6abb018d",
+  "git_dirty": true,
+  "python_version": "3.12.10",
+  "ortools_version": "9.15.6755",
+  "cpu_count": 8,
+  "input_sha256": "5cecb2eb95437d6b789726f302860cefb446731af9eadba2a8379af5644ed169",
+  "engine_shas": {
+    "load.py": "7b30a77c24bfefc19083c472ba55c325363d19a1cd8abf07d9be73729d11238c",
+    "engine.py": "bf6ccf5a9d17bfe77358ca650f1ccbc795867894fb1b247aa272b922a571bc73",
+    "solve2.py": "be4e3fc9995a75013e021f6fd99d7e13ff68aa86c3ff6eb7231858eed2309141",
+    "run3.py": "cdbc5ad6fb0cef02567b649cff646520c92b7a270de05bec9b105b9974e95b69"
+  },
+  "params": {
+    "cap": 1060,
+    "time_limit": 30.0,
+    "workers": 1,
+    "seed_assign": 11,
+    "seed_solver": 3,
+    "tariff": "mibel"
+  },
+  "tariff_config": {
+    "tariff_name": {
+      "value": "mibel",
+      "verified": true,
+      "note": "dataset energy_sources[0].price EUR/Wh"
+    },
+    "price_source": {
+      "value": "P_MIBEL from Input JSON (EUR per Wh)",
+      "verified": true,
+      "note": "dataset file"
+    },
+    "peak_window": {
+      "value": "none",
+      "verified": true,
+      "note": "MIBEL uses dataset prices, no TOU window"
+    },
+    "export_price": {
+      "value": "N/A",
+      "verified": true,
+      "note": "MIBEL scenario no PV"
+    }
+  },
+  "baseline": {
+    "cost": 87.68362445,
+    "kwh": 1315.709,
+    "viol": 0
+  },
+  "stage1_counts": {
+    "Ironing TM1": 52,
+    "Ironing TM4": 19,
+    "Harden[1] TM1": 66,
+    "Harden[0.5] TM4": 26,
+    "Harden[1.5] TM3": 8,
+    "Sublimation TM3": 40,
+    "Anti-Shrinkage TM2": 61,
+    "Harden[2] TM1": 3
+  },
+  "modes_only": {
+    "cost": 61.77587799,
+    "kwh": 923.891,
+    "viol": 1
+  },
+  "success": false,
+  "error": "stage2 infeasible",
+  "stage2_info": {
+    "status": "UNKNOWN",
+    "wall": 35.6
+  },
+  "schedule_path": null,
+  "schedule_sha256": null,
+  "traceback": "Traceback (most recent call last):\n  File \"D:\\Navitas-new\\scripts\\prove_savings.py\", line 147, in run_one\n    raise RuntimeError(\"stage2 infeasible\")\nRuntimeError: stage2 infeasible\n"
+}
+
+=== RUN cap=1060 seed=23 tariff=pk ===
+FAIL cap=1060 seed=23 tariff=pk error=stage2 infeasible
+{
+  "utc": "2026-10-31T21:11:15.175462Z",
+  "git_commit": "bd4c2fe7d42a5ef7d8b71fdc3471d89c6abb018d",
+  "git_dirty": true,
+  "python_version": "3.12.10",
+  "ortools_version": "9.15.6755",
+  "cpu_count": 8,
+  "input_sha256": "5cecb2eb95437d6b789726f302860cefb446731af9eadba2a8379af5644ed169",
+  "engine_shas": {
+    "load.py": "7b30a77c24bfefc19083c472ba55c325363d19a1cd8abf07d9be73729d11238c",
+    "engine.py": "bf6ccf5a9d17bfe77358ca650f1ccbc795867894fb1b247aa272b922a571bc73",
+    "solve2.py": "be4e3fc9995a75013e021f6fd99d7e13ff68aa86c3ff6eb7231858eed2309141",
+    "run3.py": "cdbc5ad6fb0cef02567b649cff646520c92b7a270de05bec9b105b9974e95b69"
+  },
+  "params": {
+    "cap": 1060,
+    "time_limit": 30.0,
+    "workers": 1,
+    "seed_assign": 23,
+    "seed_solver": 3,
+    "tariff": "pk"
+  },
+  "tariff_config": {
+    "tariff_name": {
+      "value": "pk",
+      "verified": true,
+      "note": "Pakistan TOU illustrative"
+    },
+    "B2_peak_Rs_per_kWh": {
+      "value": 35.68,
+      "verified": "news_only",
+      "note": "Dawn 1973828, NEPRA Feb 2026"
+    },
+    "B2_offpeak_Rs_per_kWh": {
+      "value": 22.83,
+      "verified": "news_only",
+      "note": "Dawn 1973828"
+    },
+    "peak_window": {
+      "value": "18:30-22:30 (138-186 per day, DAY=192)",
+      "verified": false,
+      "note": "UNVERIFIED"
+    },
+    "export_price_Rs_per_kWh": {
+      "value": 8.13,
+      "verified": false,
+      "note": "UNVERIFIED"
+    },
+    "demand_fixed_Rs_per_kW": {
+      "value": 1250,
+      "verified": "news_only",
+      "note": "Dawn report"
+    }
+  },
+  "baseline": {
+    "cost": 33631.652969999996,
+    "kwh": 1315.709,
+    "viol": 0
+  },
+  "stage1_counts": {
+    "Ironing TM1": 52,
+    "Ironing TM4": 19,
+    "Harden[1] TM1": 66,
+    "Harden[0.5] TM4": 26,
+    "Harden[1.5] TM3": 8,
+    "Sublimation TM3": 40,
+    "Anti-Shrinkage TM2": 61,
+    "Harden[2] TM1": 3
+  },
+  "modes_only": {
+    "cost": 23525.193529999997,
+    "kwh": 923.891,
+    "viol": 1
+  },
+  "success": false,
+  "error": "stage2 infeasible",
+  "stage2_info": {
+    "status": "UNKNOWN",
+    "wall": 31.7
+  },
+  "schedule_path": null,
+  "schedule_sha256": null,
+  "traceback": "Traceback (most recent call last):\n  File \"D:\\Navitas-new\\scripts\\prove_savings.py\", line 147, in run_one\n    raise RuntimeError(\"stage2 infeasible\")\nRuntimeError: stage2 infeasible\n"
+}
+
+=== RUN cap=1060 seed=23 tariff=mibel ===
+FAIL cap=1060 seed=23 tariff=mibel error=stage2 infeasible
+{
+  "utc": "2026-10-31T21:11:54.055174Z",
+  "git_commit": "bd4c2fe7d42a5ef7d8b71fdc3471d89c6abb018d",
+  "git_dirty": true,
+  "python_version": "3.12.10",
+  "ortools_version": "9.15.6755",
+  "cpu_count": 8,
+  "input_sha256": "5cecb2eb95437d6b789726f302860cefb446731af9eadba2a8379af5644ed169",
+  "engine_shas": {
+    "load.py": "7b30a77c24bfefc19083c472ba55c325363d19a1cd8abf07d9be73729d11238c",
+    "engine.py": "bf6ccf5a9d17bfe77358ca650f1ccbc795867894fb1b247aa272b922a571bc73",
+    "solve2.py": "be4e3fc9995a75013e021f6fd99d7e13ff68aa86c3ff6eb7231858eed2309141",
+    "run3.py": "cdbc5ad6fb0cef02567b649cff646520c92b7a270de05bec9b105b9974e95b69"
+  },
+  "params": {
+    "cap": 1060,
+    "time_limit": 30.0,
+    "workers": 1,
+    "seed_assign": 23,
+    "seed_solver": 3,
+    "tariff": "mibel"
+  },
+  "tariff_config": {
+    "tariff_name": {
+      "value": "mibel",
+      "verified": true,
+      "note": "dataset energy_sources[0].price EUR/Wh"
+    },
+    "price_source": {
+      "value": "P_MIBEL from Input JSON (EUR per Wh)",
+      "verified": true,
+      "note": "dataset file"
+    },
+    "peak_window": {
+      "value": "none",
+      "verified": true,
+      "note": "MIBEL uses dataset prices, no TOU window"
+    },
+    "export_price": {
+      "value": "N/A",
+      "verified": true,
+      "note": "MIBEL scenario no PV"
+    }
+  },
+  "baseline": {
+    "cost": 87.68362445,
+    "kwh": 1315.709,
+    "viol": 0
+  },
+  "stage1_counts": {
+    "Ironing TM1": 52,
+    "Ironing TM4": 19,
+    "Harden[1] TM1": 66,
+    "Harden[0.5] TM4": 26,
+    "Harden[1.5] TM3": 8,
+    "Sublimation TM3": 40,
+    "Anti-Shrinkage TM2": 61,
+    "Harden[2] TM1": 3
+  },
+  "modes_only": {
+    "cost": 61.64899317,
+    "kwh": 923.891,
+    "viol": 1
+  },
+  "success": false,
+  "error": "stage2 infeasible",
+  "stage2_info": {
+    "status": "UNKNOWN",
+    "wall": 35.4
+  },
+  "schedule_path": null,
+  "schedule_sha256": null,
+  "traceback": "Traceback (most recent call last):\n  File \"D:\\Navitas-new\\scripts\\prove_savings.py\", line 147, in run_one\n    raise RuntimeError(\"stage2 infeasible\")\nRuntimeError: stage2 infeasible\n"
+}
+
+=== RUN cap=1100 seed=7 tariff=pk ===
+FAIL cap=1100 seed=7 tariff=pk error=stage2 infeasible
+{
+  "utc": "2026-10-31T21:12:37.182714Z",
+  "git_commit": "bd4c2fe7d42a5ef7d8b71fdc3471d89c6abb018d",
+  "git_dirty": true,
+  "python_version": "3.12.10",
+  "ortools_version": "9.15.6755",
+  "cpu_count": 8,
+  "input_sha256": "5cecb2eb95437d6b789726f302860cefb446731af9eadba2a8379af5644ed169",
+  "engine_shas": {
+    "load.py": "7b30a77c24bfefc19083c472ba55c325363d19a1cd8abf07d9be73729d11238c",
+    "engine.py": "bf6ccf5a9d17bfe77358ca650f1ccbc795867894fb1b247aa272b922a571bc73",
+    "solve2.py": "be4e3fc9995a75013e021f6fd99d7e13ff68aa86c3ff6eb7231858eed2309141",
+    "run3.py": "cdbc5ad6fb0cef02567b649cff646520c92b7a270de05bec9b105b9974e95b69"
+  },
+  "params": {
+    "cap": 1100,
+    "time_limit": 30.0,
+    "workers": 1,
+    "seed_assign": 7,
+    "seed_solver": 3,
+    "tariff": "pk"
+  },
+  "tariff_config": {
+    "tariff_name": {
+      "value": "pk",
+      "verified": true,
+      "note": "Pakistan TOU illustrative"
+    },
+    "B2_peak_Rs_per_kWh": {
+      "value": 35.68,
+      "verified": "news_only",
+      "note": "Dawn 1973828, NEPRA Feb 2026"
+    },
+    "B2_offpeak_Rs_per_kWh": {
+      "value": 22.83,
+      "verified": "news_only",
+      "note": "Dawn 1973828"
+    },
+    "peak_window": {
+      "value": "18:30-22:30 (138-186 per day, DAY=192)",
+      "verified": false,
+      "note": "UNVERIFIED"
+    },
+    "export_price_Rs_per_kWh": {
+      "value": 8.13,
+      "verified": false,
+      "note": "UNVERIFIED"
+    },
+    "demand_fixed_Rs_per_kW": {
+      "value": 1250,
+      "verified": "news_only",
+      "note": "Dawn report"
+    }
+  },
+  "baseline": {
+    "cost": 33631.652969999996,
+    "kwh": 1315.709,
+    "viol": 0
+  },
+  "stage1_counts": {
+    "Ironing TM1": 57,
+    "Ironing TM3": 4,
+    "Ironing TM4": 10,
+    "Harden[1] TM1": 66,
+    "Harden[0.5] TM4": 26,
+    "Harden[1.5] TM3": 8,
+    "Sublimation TM3": 40,
+    "Anti-Shrinkage TM2": 61,
+    "Harden[2] TM1": 3
+  },
+  "modes_only": {
+    "cost": 22411.66691,
+    "kwh": 877.227,
+    "viol": 3
+  },
+  "success": false,
+  "error": "stage2 infeasible",
+  "stage2_info": {
+    "status": "UNKNOWN",
+    "wall": 28.7
+  },
+  "schedule_path": null,
+  "schedule_sha256": null,
+  "traceback": "Traceback (most recent call last):\n  File \"D:\\Navitas-new\\scripts\\prove_savings.py\", line 147, in run_one\n    raise RuntimeError(\"stage2 infeasible\")\nRuntimeError: stage2 infeasible\n"
+}
+
+=== RUN cap=1100 seed=7 tariff=mibel ===
+FAIL cap=1100 seed=7 tariff=mibel error=stage2 infeasible
+{
+  "utc": "2026-10-31T21:13:14.632968Z",
+  "git_commit": "bd4c2fe7d42a5ef7d8b71fdc3471d89c6abb018d",
+  "git_dirty": true,
+  "python_version": "3.12.10",
+  "ortools_version": "9.15.6755",
+  "cpu_count": 8,
+  "input_sha256": "5cecb2eb95437d6b789726f302860cefb446731af9eadba2a8379af5644ed169",
+  "engine_shas": {
+    "load.py": "7b30a77c24bfefc19083c472ba55c325363d19a1cd8abf07d9be73729d11238c",
+    "engine.py": "bf6ccf5a9d17bfe77358ca650f1ccbc795867894fb1b247aa272b922a571bc73",
+    "solve2.py": "be4e3fc9995a75013e021f6fd99d7e13ff68aa86c3ff6eb7231858eed2309141",
+    "run3.py": "cdbc5ad6fb0cef02567b649cff646520c92b7a270de05bec9b105b9974e95b69"
+  },
+  "params": {
+    "cap": 1100,
+    "time_limit": 30.0,
+    "workers": 1,
+    "seed_assign": 7,
+    "seed_solver": 3,
+    "tariff": "mibel"
+  },
+  "tariff_config": {
+    "tariff_name": {
+      "value": "mibel",
+      "verified": true,
+      "note": "dataset energy_sources[0].price EUR/Wh"
+    },
+    "price_source": {
+      "value": "P_MIBEL from Input JSON (EUR per Wh)",
+      "verified": true,
+      "note": "dataset file"
+    },
+    "peak_window": {
+      "value": "none",
+      "verified": true,
+      "note": "MIBEL uses dataset prices, no TOU window"
+    },
+    "export_price": {
+      "value": "N/A",
+      "verified": true,
+      "note": "MIBEL scenario no PV"
+    }
+  },
+  "baseline": {
+    "cost": 87.68362445,
+    "kwh": 1315.709,
+    "viol": 0
+  },
+  "stage1_counts": {
+    "Ironing TM1": 57,
+    "Ironing TM3": 4,
+    "Ironing TM4": 10,
+    "Harden[1] TM1": 66,
+    "Harden[0.5] TM4": 26,
+    "Harden[1.5] TM3": 8,
+    "Sublimation TM3": 40,
+    "Anti-Shrinkage TM2": 61,
+    "Harden[2] TM1": 3
+  },
+  "modes_only": {
+    "cost": 58.52848847,
+    "kwh": 877.227,
+    "viol": 3
+  },
+  "success": false,
+  "error": "stage2 infeasible",
+  "stage2_info": {
+    "status": "UNKNOWN",
+    "wall": 38.3
+  },
+  "schedule_path": null,
+  "schedule_sha256": null,
+  "traceback": "Traceback (most recent call last):\n  File \"D:\\Navitas-new\\scripts\\prove_savings.py\", line 147, in run_one\n    raise RuntimeError(\"stage2 infeasible\")\nRuntimeError: stage2 infeasible\n"
+}
+
+=== RUN cap=1100 seed=11 tariff=pk ===
+FAIL cap=1100 seed=11 tariff=pk error=stage2 infeasible
+{
+  "utc": "2026-10-31T21:14:00.794306Z",
+  "git_commit": "bd4c2fe7d42a5ef7d8b71fdc3471d89c6abb018d",
+  "git_dirty": true,
+  "python_version": "3.12.10",
+  "ortools_version": "9.15.6755",
+  "cpu_count": 8,
+  "input_sha256": "5cecb2eb95437d6b789726f302860cefb446731af9eadba2a8379af5644ed169",
+  "engine_shas": {
+    "load.py": "7b30a77c24bfefc19083c472ba55c325363d19a1cd8abf07d9be73729d11238c",
+    "engine.py": "bf6ccf5a9d17bfe77358ca650f1ccbc795867894fb1b247aa272b922a571bc73",
+    "solve2.py": "be4e3fc9995a75013e021f6fd99d7e13ff68aa86c3ff6eb7231858eed2309141",
+    "run3.py": "cdbc5ad6fb0cef02567b649cff646520c92b7a270de05bec9b105b9974e95b69"
+  },
+  "params": {
+    "cap": 1100,
+    "time_limit": 30.0,
+    "workers": 1,
+    "seed_assign": 11,
+    "seed_solver": 3,
+    "tariff": "pk"
+  },
+  "tariff_config": {
+    "tariff_name": {
+      "value": "pk",
+      "verified": true,
+      "note": "Pakistan TOU illustrative"
+    },
+    "B2_peak_Rs_per_kWh": {
+      "value": 35.68,
+      "verified": "news_only",
+      "note": "Dawn 1973828, NEPRA Feb 2026"
+    },
+    "B2_offpeak_Rs_per_kWh": {
+      "value": 22.83,
+      "verified": "news_only",
+      "note": "Dawn 1973828"
+    },
+    "peak_window": {
+      "value": "18:30-22:30 (138-186 per day, DAY=192)",
+      "verified": false,
+      "note": "UNVERIFIED"
+    },
+    "export_price_Rs_per_kWh": {
+      "value": 8.13,
+      "verified": false,
+      "note": "UNVERIFIED"
+    },
+    "demand_fixed_Rs_per_kW": {
+      "value": 1250,
+      "verified": "news_only",
+      "note": "Dawn report"
+    }
+  },
+  "baseline": {
+    "cost": 33631.652969999996,
+    "kwh": 1315.709,
+    "viol": 0
+  },
+  "stage1_counts": {
+    "Ironing TM1": 57,
+    "Ironing TM3": 4,
+    "Ironing TM4": 10,
+    "Harden[1] TM1": 66,
+    "Harden[0.5] TM4": 26,
+    "Harden[1.5] TM3": 8,
+    "Sublimation TM3": 40,
+    "Anti-Shrinkage TM2": 61,
+    "Harden[2] TM1": 3
+  },
+  "modes_only": {
+    "cost": 22515.572009999996,
+    "kwh": 877.227,
+    "viol": 3
+  },
+  "success": false,
+  "error": "stage2 infeasible",
+  "stage2_info": {
+    "status": "UNKNOWN",
+    "wall": 31.4
+  },
+  "schedule_path": null,
+  "schedule_sha256": null,
+  "traceback": "Traceback (most recent call last):\n  File \"D:\\Navitas-new\\scripts\\prove_savings.py\", line 147, in run_one\n    raise RuntimeError(\"stage2 infeasible\")\nRuntimeError: stage2 infeasible\n"
+}
+
+=== RUN cap=1100 seed=11 tariff=mibel ===
+FAIL cap=1100 seed=11 tariff=mibel error=stage2 infeasible
+{
+  "utc": "2026-10-31T21:14:41.559554Z",
+  "git_commit": "bd4c2fe7d42a5ef7d8b71fdc3471d89c6abb018d",
+  "git_dirty": true,
+  "python_version": "3.12.10",
+  "ortools_version": "9.15.6755",
+  "cpu_count": 8,
+  "input_sha256": "5cecb2eb95437d6b789726f302860cefb446731af9eadba2a8379af5644ed169",
+  "engine_shas": {
+    "load.py": "7b30a77c24bfefc19083c472ba55c325363d19a1cd8abf07d9be73729d11238c",
+    "engine.py": "bf6ccf5a9d17bfe77358ca650f1ccbc795867894fb1b247aa272b922a571bc73",
+    "solve2.py": "be4e3fc9995a75013e021f6fd99d7e13ff68aa86c3ff6eb7231858eed2309141",
+    "run3.py": "cdbc5ad6fb0cef02567b649cff646520c92b7a270de05bec9b105b9974e95b69"
+  },
+  "params": {
+    "cap": 1100,
+    "time_limit": 30.0,
+    "workers": 1,
+    "seed_assign": 11,
+    "seed_solver": 3,
+    "tariff": "mibel"
+  },
+  "tariff_config": {
+    "tariff_name": {
+      "value": "mibel",
+      "verified": true,
+      "note": "dataset energy_sources[0].price EUR/Wh"
+    },
+    "price_source": {
+      "value": "P_MIBEL from Input JSON (EUR per Wh)",
+      "verified": true,
+      "note": "dataset file"
+    },
+    "peak_window": {
+      "value": "none",
+      "verified": true,
+      "note": "MIBEL uses dataset prices, no TOU window"
+    },
+    "export_price": {
+      "value": "N/A",
+      "verified": true,
+      "note": "MIBEL scenario no PV"
+    }
+  },
+  "baseline": {
+    "cost": 87.68362445,
+    "kwh": 1315.709,
+    "viol": 0
+  },
+  "stage1_counts": {
+    "Ironing TM1": 57,
+    "Ironing TM3": 4,
+    "Ironing TM4": 10,
+    "Harden[1] TM1": 66,
+    "Harden[0.5] TM4": 26,
+    "Harden[1.5] TM3": 8,
+    "Sublimation TM3": 40,
+    "Anti-Shrinkage TM2": 61,
+    "Harden[2] TM1": 3
+  },
+  "modes_only": {
+    "cost": 58.579651330000004,
+    "kwh": 877.227,
+    "viol": 3
+  },
+  "success": false,
+  "error": "stage2 infeasible",
+  "stage2_info": {
+    "status": "UNKNOWN",
+    "wall": 34.8
+  },
+  "schedule_path": null,
+  "schedule_sha256": null,
+  "traceback": "Traceback (most recent call last):\n  File \"D:\\Navitas-new\\scripts\\prove_savings.py\", line 147, in run_one\n    raise RuntimeError(\"stage2 infeasible\")\nRuntimeError: stage2 infeasible\n"
+}
+
+=== RUN cap=1100 seed=23 tariff=pk ===
+FAIL cap=1100 seed=23 tariff=pk error=stage2 infeasible
+{
+  "utc": "2026-10-31T21:15:24.713566Z",
+  "git_commit": "bd4c2fe7d42a5ef7d8b71fdc3471d89c6abb018d",
+  "git_dirty": true,
+  "python_version": "3.12.10",
+  "ortools_version": "9.15.6755",
+  "cpu_count": 8,
+  "input_sha256": "5cecb2eb95437d6b789726f302860cefb446731af9eadba2a8379af5644ed169",
+  "engine_shas": {
+    "load.py": "7b30a77c24bfefc19083c472ba55c325363d19a1cd8abf07d9be73729d11238c",
+    "engine.py": "bf6ccf5a9d17bfe77358ca650f1ccbc795867894fb1b247aa272b922a571bc73",
+    "solve2.py": "be4e3fc9995a75013e021f6fd99d7e13ff68aa86c3ff6eb7231858eed2309141",
+    "run3.py": "cdbc5ad6fb0cef02567b649cff646520c92b7a270de05bec9b105b9974e95b69"
+  },
+  "params": {
+    "cap": 1100,
+    "time_limit": 30.0,
+    "workers": 1,
+    "seed_assign": 23,
+    "seed_solver": 3,
+    "tariff": "pk"
+  },
+  "tariff_config": {
+    "tariff_name": {
+      "value": "pk",
+      "verified": true,
+      "note": "Pakistan TOU illustrative"
+    },
+    "B2_peak_Rs_per_kWh": {
+      "value": 35.68,
+      "verified": "news_only",
+      "note": "Dawn 1973828, NEPRA Feb 2026"
+    },
+    "B2_offpeak_Rs_per_kWh": {
+      "value": 22.83,
+      "verified": "news_only",
+      "note": "Dawn 1973828"
+    },
+    "peak_window": {
+      "value": "18:30-22:30 (138-186 per day, DAY=192)",
+      "verified": false,
+      "note": "UNVERIFIED"
+    },
+    "export_price_Rs_per_kWh": {
+      "value": 8.13,
+      "verified": false,
+      "note": "UNVERIFIED"
+    },
+    "demand_fixed_Rs_per_kW": {
+      "value": 1250,
+      "verified": "news_only",
+      "note": "Dawn report"
+    }
+  },
+  "baseline": {
+    "cost": 33631.652969999996,
+    "kwh": 1315.709,
+    "viol": 0
+  },
+  "stage1_counts": {
+    "Ironing TM1": 57,
+    "Ironing TM3": 4,
+    "Ironing TM4": 10,
+    "Harden[1] TM1": 66,
+    "Harden[0.5] TM4": 26,
+    "Harden[1.5] TM3": 8,
+    "Sublimation TM3": 40,
+    "Anti-Shrinkage TM2": 61,
+    "Harden[2] TM1": 3
+  },
+  "modes_only": {
+    "cost": 22336.77711,
+    "kwh": 877.227,
+    "viol": 2
+  },
+  "success": false,
+  "error": "stage2 infeasible",
+  "stage2_info": {
+    "status": "UNKNOWN",
+    "wall": 31.0
+  },
+  "schedule_path": null,
+  "schedule_sha256": null,
+  "traceback": "Traceback (most recent call last):\n  File \"D:\\Navitas-new\\scripts\\prove_savings.py\", line 147, in run_one\n    raise RuntimeError(\"stage2 infeasible\")\nRuntimeError: stage2 infeasible\n"
+}
+
+=== RUN cap=1100 seed=23 tariff=mibel ===
+FAIL cap=1100 seed=23 tariff=mibel error=stage2 infeasible
+{
+  "utc": "2026-10-31T21:16:03.647549Z",
+  "git_commit": "bd4c2fe7d42a5ef7d8b71fdc3471d89c6abb018d",
+  "git_dirty": true,
+  "python_version": "3.12.10",
+  "ortools_version": "9.15.6755",
+  "cpu_count": 8,
+  "input_sha256": "5cecb2eb95437d6b789726f302860cefb446731af9eadba2a8379af5644ed169",
+  "engine_shas": {
+    "load.py": "7b30a77c24bfefc19083c472ba55c325363d19a1cd8abf07d9be73729d11238c",
+    "engine.py": "bf6ccf5a9d17bfe77358ca650f1ccbc795867894fb1b247aa272b922a571bc73",
+    "solve2.py": "be4e3fc9995a75013e021f6fd99d7e13ff68aa86c3ff6eb7231858eed2309141",
+    "run3.py": "cdbc5ad6fb0cef02567b649cff646520c92b7a270de05bec9b105b9974e95b69"
+  },
+  "params": {
+    "cap": 1100,
+    "time_limit": 30.0,
+    "workers": 1,
+    "seed_assign": 23,
+    "seed_solver": 3,
+    "tariff": "mibel"
+  },
+  "tariff_config": {
+    "tariff_name": {
+      "value": "mibel",
+      "verified": true,
+      "note": "dataset energy_sources[0].price EUR/Wh"
+    },
+    "price_source": {
+      "value": "P_MIBEL from Input JSON (EUR per Wh)",
+      "verified": true,
+      "note": "dataset file"
+    },
+    "peak_window": {
+      "value": "none",
+      "verified": true,
+      "note": "MIBEL uses dataset prices, no TOU window"
+    },
+    "export_price": {
+      "value": "N/A",
+      "verified": true,
+      "note": "MIBEL scenario no PV"
+    }
+  },
+  "baseline": {
+    "cost": 87.68362445,
+    "kwh": 1315.709,
+    "viol": 0
+  },
+  "stage1_counts": {
+    "Ironing TM1": 57,
+    "Ironing TM3": 4,
+    "Ironing TM4": 10,
+    "Harden[1] TM1": 66,
+    "Harden[0.5] TM4": 26,
+    "Harden[1.5] TM3": 8,
+    "Sublimation TM3": 40,
+    "Anti-Shrinkage TM2": 61,
+    "Harden[2] TM1": 3
+  },
+  "modes_only": {
+    "cost": 58.4913572,
+    "kwh": 877.227,
+    "viol": 2
+  },
+  "success": false,
+  "error": "stage2 infeasible",
+  "stage2_info": {
+    "status": "UNKNOWN",
+    "wall": 34.8
+  },
+  "schedule_path": null,
+  "schedule_sha256": null,
+  "traceback": "Traceback (most recent call last):\n  File \"D:\\Navitas-new\\scripts\\prove_savings.py\", line 147, in run_one\n    raise RuntimeError(\"stage2 infeasible\")\nRuntimeError: stage2 infeasible\n"
+}

@@ -1,0 +1,38 @@
+{
+ "which": "pk",
+ "cap": 1000,
+ "seed": 23,
+ "baseline": {
+  "cost": 33631.652969999996,
+  "kwh": 1315.709,
+  "viol": 0
+ },
+ "stage1_counts": {
+  "Ironing TM1": 45,
+  "Ironing TM4": 26,
+  "Harden[1] TM1": 62,
+  "Harden[1] TM5": 4,
+  "Harden[0.5] TM4": 26,
+  "Harden[1.5] TM3": 8,
+  "Sublimation TM3": 40,
+  "Anti-Shrinkage TM2": 61,
+  "Harden[2] TM1": 3
+ },
+ "modes_only": {
+  "cost": 25732.66568,
+  "kwh": 1007.471,
+  "viol": 0
+ },
+ "stage2_info": {
+  "status": "FEASIBLE",
+  "wall": 90.6,
+  "bound": 23000.604,
+  "obj": 25693.386
+ },
+ "full": {
+  "cost": 25693.357529999997,
+  "kwh": 1007.471,
+  "viol": 0,
+  "makespan": 1062
+ }
+}
