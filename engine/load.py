@@ -1,5 +1,8 @@
-import json, collections
-d=json.load(open('/mnt/user-data/uploads/Input_JSON_Schedule_Optimization.json'))
+import json, collections, pathlib
+_p = pathlib.Path(__file__).resolve().parent.parent / "data" / "gecad" / "Input_JSON_Schedule_Optimization.json"
+if not _p.exists():
+    _p = pathlib.Path("data/gecad/Input_JSON_Schedule_Optimization.json")
+d=json.load(open(_p))
 TM={t['id']:t['power'] for t in d['task_modes']}
 TASK_MODES={t['id']:t['task_modes'] for t in d['tasks']}
 MACH_MODES={m['id']:set(m['task_modes']) for m in d['machines']}
