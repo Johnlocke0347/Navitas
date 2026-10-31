@@ -9,9 +9,6 @@ __pycache__/
 # Data (gitignored, see DATA_SOURCES.md for provenance)
 data/
 
-# Results ignore raw CSV/JSON but keep markdown
+# Results keep markdown, ignore large outputs if needed
 # results/*.csv
 # results/*.json
-
-# Logs
-logs/calls.jsonl
