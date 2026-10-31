@@ -75,7 +75,39 @@ def tariff_config(which: str):
             "export_price": {"value":"N/A","verified":True,"note":"MIBEL scenario no PV"},
         }
 
+def _check_clean_or_die():
+    # audit requires clean tree BEFORE any run: no staged or unstaged changes to tracked files
+    # (untracked files in results/ are allowed as they are outputs)
+    try:
+        # check staged
+        subprocess.check_call(["git","diff","--cached","--quiet"], cwd=ROOT)
+        # check unstaged
+        subprocess.check_call(["git","diff","--quiet"], cwd=ROOT)
+    except subprocess.CalledProcessError:
+        print("ERROR: git tree is dirty — commit everything before running prove_savings.py (audit requires clean status).", file=sys.stderr)
+        print("Run `git status` and commit or stash changes.", file=sys.stderr)
+        print("Hint: `git diff` or `git diff --cached` shows changes to tracked files.", file=sys.stderr)
+        sys.exit(2)
+    # also check for untracked files that are not in results/ or ignored
+    try:
+        out = subprocess.check_output(["git","status","--porcelain","--untracked-files=all"], cwd=ROOT).decode()
+        # filter out ignored and expected untracked in results/ (new runs) and navitas_real_data/ etc are now ignored
+        bad = []
+        for line in out.splitlines():
+            if line.startswith("??"):
+                path = line[3:].strip()
+                # allow untracked in results/ as they are outputs (but they should be committed after run, not before)
+                # For pre-run check, we want clean, so even untracked in results/ should be considered dirty before run
+                # So if there are untracked files in results/ before run, that's dirty (should have been committed)
+                bad.append(path)
+        if bad:
+            print(f"ERROR: untracked files present: {bad} — commit or gitignore before run.", file=sys.stderr)
+            sys.exit(2)
+    except Exception:
+        pass
+
 def run_one(cap: int, seed: int, which: str, timelimit: float = 120.0, workers: int = 1):
+    _check_clean_or_die()
     utc = datetime.datetime.utcnow().isoformat() + "Z"
     git_commit, git_dirty = git_info()
     py_ver, ort_ver = py_and_ortools()

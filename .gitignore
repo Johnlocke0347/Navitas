@@ -12,3 +12,13 @@ data/
 # Results keep markdown, ignore large outputs if needed
 # results/*.csv
 # results/*.json
+
+# Duplicate sources (original copy, not used for new runs)
+navitas_real_data/
+
+# Solver outputs in repo root (duplicate of results/ — delete per audit step 3b)
+res2_*.json
+sched2_*.json
+sched_*.json
+prove_log*.txt
+*.log
