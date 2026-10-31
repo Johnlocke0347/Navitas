@@ -1,6 +1,9 @@
 import sys, json, time, numpy as np
 from ortools.sat.python import cp_model
-from engine import *
+try:
+    from engine import *
+except ImportError:
+    from engine.engine import *
 
 def stage1(cap, wprice=None):
     """choose how many instances of each task use each (machine,mode): min price-weighted energy s.t. machine capacity (periods)"""

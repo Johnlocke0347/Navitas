@@ -1,5 +1,8 @@
 import numpy as np
-from load import *
+try:
+    from load import *
+except ImportError:
+    from engine.load import *
 
 SOL=np.array(SOLAR,dtype=float)
 P_MIBEL=np.array(PRICE)           # EUR per Wh (dataset's own prices)

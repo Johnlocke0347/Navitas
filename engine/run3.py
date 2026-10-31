@@ -1,5 +1,8 @@
 import json,sys
-from solve2 import *
+try:
+    from solve2 import *
+except ImportError:
+    from engine.solve2 import *
 base=baseline_edf()
 which=sys.argv[1]
 price,scale=(P_MIBEL,10**6) if which=='mibel' else (pk_tariff(),10**3)
