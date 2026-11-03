@@ -22,3 +22,21 @@ sched2_*.json
 sched_*.json
 prove_log*.txt
 *.log
+
+# Comprehensive environment-file protection
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# Solver outputs in repository root
+res2_*.json
+sched2_*.json
+sched_*.json
+prove_log*.txt
+*.log
+
+# Runtime cache (do not publish)
+/app/cache/
