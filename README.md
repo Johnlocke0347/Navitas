@@ -1,119 +1,301 @@
-# Navitas — AI Energy Optimizer for Textile Mills
+# Navitas — AI-Powered Energy Optimization for Textile Manufacturing
 
-**Same work. Smaller electricity bill.** Navitas re-plans factory production to cut
-electricity cost, understands plain-English constraints and photos of electricity
-bills, and proves every plan with an independent checker.
+**Same production. Lower electricity costs. Verified schedules.**
 
-**Headline result (real production data): ~30% lower energy cost** vs a
-fastest-mode, tariff-blind schedule (24–34% depending on allowed machine load),
-**0 rule violations**, reproducible from an append-only run log. Measured on a
-real 3-machine, 6-day production benchmark from GECAD/Polytechnic of Porto
-(Zenodo 4106746). Full proof: [`results/SAVINGS_PROOF_v2.md`](results/SAVINGS_PROOF_v2.md).
+Navitas is an AI-powered factory energy optimization system that helps manufacturers make better decisions about when and how their machines operate.
+
+Operators describe production constraints in natural language or provide an electricity-bill image. Meta Muse Spark interprets the request, a constraint-based optimization engine generates a production schedule, and an independent verifier checks the result before it is presented.
+
+**Built for the Meta Global AI Developer Hackathon 2026 · Push the Frontier**
 
 ---
 
-## Why
+## The problem
 
-In Faisalabad, around 40% of power-loom units have reportedly closed, with
-electricity costs among the main pressures (per industry representatives,
-reported by Pakistani press, Oct 2026). Taxes, imports and yarn prices a mill
-cannot control — **when and how its machines run, it can.** Navitas targets
-exactly that.
+Electricity is a major operating expense for energy-intensive manufacturing. Yet production schedules are often created around deadlines and machine availability without fully accounting for time-varying electricity prices.
 
-## What it does (demo flow)
+Factories cannot always control electricity tariffs. They can, however, make better decisions about when eligible production tasks run, which machine modes are selected, and how production is distributed across available time.
 
-1. **You describe a problem in plain words** — "MAQ119 is down on day 3" or
-   "nothing runs 18:30–22:30" — or **upload a photo of an electricity bill**.
-2. **Muse Spark Open (Meta, via Baseten)** parses it into structured
-   constraints (tool calling), or reads the tariff from the photo (vision).
-   Every model call is routed through `llm.py` and logged to
-   `logs/calls.jsonl` with model name, host, latency and token usage.
-3. **An exact CP-SAT solver** re-plans machine modes and start times.
-4. **An independent verifier** (`engine/verify_schedule.py`, shares no code
-   with the solver) re-checks every rule from scratch: machine/mode
-   eligibility, no overlaps, day boundaries, deadline, task order, collision
-   rules — and recomputes cost and kWh.
-5. **Spark explains the result** in plain language, quoting only numbers the
-   checker verified.
+Navitas explores that opportunity through constrained energy-aware scheduling.
 
-Three pre-solved scenarios ship with the repo (0 violations each):
+## How Navitas works
 
-| Scenario | Navitas | Plain plan under same constraint |
-|---|---|---|
-| No extra constraints | Rs 23,075 (31.4% cheaper) | Rs 33,632 |
-| MAQ119 down all of day 3 | Rs 25,603 (28.5% cheaper) | Rs 35,817 |
-| Nothing runs 18:30–22:30 | Rs 30,564 — valid plan found | plain plan **cannot meet the deadline** |
+1. **Describe the production situation.** An operator enters a natural-language instruction, such as "MAQ119 is unavailable on day 3" or "No machines can operate between 18:30 and 22:30."
+2. **Interpret the request with Meta Muse Spark.** The model converts the operator's request into structured constraints. The application also supports electricity-bill image interpretation.
+3. **Optimize the schedule.** OR-Tools CP-SAT searches for a lower-cost schedule while respecting the modeled production constraints.
+4. **Verify independently.** A separate verification implementation checks the resulting schedule and recomputes its energy cost.
+5. **Explain the result.** Muse Spark presents the verified outcome in understandable language.
 
-If the network or API fails mid-demo, the UI replays the last **real** model
-answers, always badged `RECORDED` vs `LIVE` — never silently.
+The LLM does not independently decide whether a schedule is valid. The optimization engine generates the schedule, and the independent checker evaluates it.
 
-## Quick start
+## Architecture
+
+```text
+Factory operator
+      |
+      v
+Natural-language request / bill image
+      |
+      v
+Meta Muse Spark Open
+      |
+      v
+Structured constraints
+      |
+      v
+OR-Tools CP-SAT optimizer
+      |
+      v
+Candidate production schedule
+      |
+      v
+Independent schedule verifier
+      |
+      v
+Verified cost, energy and schedule
+      |
+      v
+Muse Spark explanation
+```
+
+### Technology
+
+| Component | Technology |
+|---|---|
+| AI model | Meta Muse Spark Open |
+| Primary inference | Baseten |
+| Model fallback | Fireworks |
+| Optimization | Google OR-Tools CP-SAT |
+| Backend | Python |
+| Web application | Python standard-library server |
+| Frontend | HTML, CSS and JavaScript |
+| Verification | Independent Python implementation |
+
+Model routing, provider configuration, model restrictions and call-provenance logging are implemented in `llm.py`. See [MODEL_PROVENANCE.md](MODEL_PROVENANCE.md).
+
+## Benchmark results
+
+Navitas was evaluated on a real production-line scheduling and energy dataset from GECAD / Polytechnic of Porto, published on Zenodo.
+
+**Headline result: 30.1% median lower modeled electricity cost** at the 1060 machine-capacity setting, compared with the project's tariff-blind fastest-mode baseline under an illustrative Pakistan time-of-use tariff.
+
+### Pakistan tariff experiment
+
+| Machine capacity | Saving range across 3 seeds | Median saving |
+|---:|---:|---:|
+| 1000 | 23.4–24.1% | 23.6% |
+| 1060 | 29.2–30.8% | **30.1%** |
+| 1100 | 33.7–33.9% | 33.9% |
+
+### MIBEL dataset tariff experiment
+
+| Machine capacity | Saving range across 3 seeds | Median saving |
+|---:|---:|---:|
+| 1000 | 23.1–23.2% | 23.2% |
+| 1060 | 29.5–29.7% | 29.6% |
+| 1100 | 33.1–33.3% | 33.2% |
+
+### Independent verification
+
+- 32 solver attempts recorded in the append-only experiment log.
+- 18 successful configurations out of 18.
+- **18/18 schedules independently rechecked successfully.**
+- Schedule hashes, constraint violations and recomputed costs were checked against the recorded experiment results.
+
+### Comparison with published work
+
+Against the dataset authors' published genetic-algorithm solution, Navitas's schedules produced a median 19.6% lower grid-import-only cost across nine comparisons, with results ranging from 7.9% to 25.6%.
+
+This comparison uses the dataset's MIBEL prices and solar data. Navitas's schedules were not optimized for solar generation.
+
+Full experimental methodology, run records and calculations:
+
+[Read the complete savings proof](results/SAVINGS_PROOF_v2.md)
+
+## Demonstration scenarios
+
+The repository includes three precomputed scenarios with independently verified schedules.
+
+| Scenario | Navitas result | Baseline comparison |
+|---|---:|---:|
+| No additional constraints | Rs 23,075 | Rs 33,632 |
+| MAQ119 unavailable on day 3 | Rs 25,603 | Rs 35,817 |
+| No operation between 18:30–22:30 | Rs 30,564 | Baseline cannot meet the deadline |
+
+The first two scenarios represent 31.4% and 28.5% lower modeled cost respectively.
+
+The application distinguishes between `LIVE`, `RECORDED` and `TEMPLATE` responses. Recorded responses are genuine earlier model outputs; they are not silently presented as live inference.
+
+See [DEMO_README.md](DEMO_README.md) for the demonstration instructions.
+
+## Run locally
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/Johnlocke0347/Navitas.git
+cd Navitas
+```
+
+### 2. Install dependencies
+
+```bash
+python -m venv .venv
+```
+
+Activate the environment:
+
+**Windows PowerShell**
+```powershell
+.venv\Scripts\Activate.ps1
+```
+
+**Linux / macOS**
+```bash
+source .venv/bin/activate
+```
+
+Install packages:
 
 ```bash
 pip install -r requirements.txt
-cp .env.example .env            # add your Baseten/Fireworks keys
-python -m pytest tests -q       # 19 tests, no keys needed
-python scripts/record_demo_answers.py   # makes live model calls, saves replay
-python app/server.py            # open http://127.0.0.1:8000
 ```
 
-Reproduce the core result: `python engine/solve2.py pk 1060 120`
-(expected: ~31% saving, 0 violations; raw output also lands in `results/`).
+### 3. Obtain the benchmark data
 
-## Built during the hackathon (Meta Global AI Developer Hackathon, Oct 27 – Nov 4 2026)
+The raw GECAD dataset is not redistributed in this repository because its Zenodo record does not state a redistribution license.
 
-- **Oct 27–29** — CP-SAT solver and independent checker for the real GECAD
-  benchmark; model provenance router `llm.py` with call logging.
-- **Nov 1** — fresh repo: proof pipeline (append-only `results/runs.jsonl`,
-  18-config matrix, `SAVINGS_PROOF_v2.md`), independent verifier tests.
-- **Nov 2–3** — **Muse Spark agent layer**: tool-calling constraint parser,
-  bill-photo vision, replay store, demo web app. 21 live Spark calls logged
-  on Nov 3 (`logs/calls.jsonl`).
+Download the dataset from:
 
-Pre-existing public components we built on: the GECAD benchmark dataset
-(cited, not redistributed), CP-SAT (OR-Tools), and open datasets listed in
-`DATA_SOURCES.md`. No third-party code is embedded.
+https://zenodo.org/records/4106746
 
-**AI tooling disclosure:** code was written with AI assistance (Claude and
-Muse Spark via coding agents); all components are owned and verified by the
-author, and every model call in the product is logged.
+Place the following files in `data/gecad/`:
 
-## How it's scored / verified
+```text
+data/
+└── gecad/
+    ├── Input_JSON_Schedule_Optimization.json
+    └── Output_JSON_Schedule_Optimization.json
+```
 
-- **Reproducible results:** every solver run is one append-only JSON line in
-  `results/runs.jsonl` (params, code+data SHA256, tariff flags, costs, bound,
-  schedule hash). Regenerate the proof: `python scripts/regen_proof.py`.
-- **Independent check:** my re-verification of all 18 committed schedules —
-  constraint compliance and cost recomputation — passes 18/18.
-- **Against published work:** on the dataset authors' own MIBEL prices and
-  their published solution, our median cost is **19.6% lower** (range 8–26%
-  across 9 runs; our solver was not even solar-aware).
+The input JSON is required for the core solver and independent verification. The output JSON is used for comparison with the dataset authors' published solution.
 
-## Assumptions & limits (read before quoting any number)
+See [DATA_SOURCES.md](DATA_SOURCES.md) for dataset provenance and licensing information.
 
-- The benchmark is a small **hang-tag textile production cell**, not a
-  Pakistani dye house; savings on other plants will differ.
-- Sample tariff (peak Rs 35.68 / off-peak Rs 22.83, window 18:30–22:30) is
-  from Feb-2026 news reports of the NEPRA notification; **peak window and
-  export price (Rs 8.13) are unverified assumptions**.
-- The ~30% saving assumes the lower-energy machine/task **modes are
-  interchangeable at equal product quality** — true inside the benchmark's
-  own model, **not yet confirmed with the dataset authors**.
-- "Plain plan" baseline is our definition: tariff-blind, fastest-mode,
-  earliest-deadline-first.
-- Solver gap not closed (~8% bound); solves are 1-core, 2–4 minutes.
+### 4. Configure model access
 
-## Stack
+Create a local environment file:
 
-- **Muse Spark Open** (`meta-models/muse-spark-open-1026`, Meta open-weight
-  model) on **Baseten**, Fireworks fallback — tool calling + vision, logged
-  via `llm.py`. See `MODEL_PROVENANCE.md`.
-- OR-Tools CP-SAT (exact solver), Python stdlib web server, vanilla JS front end.
-- Datasets & licenses: `DATA_SOURCES.md` (GECAD license not stated → cited and
-  linked only; Irish factory CC BY 4.0; others listed there).
+```powershell
+Copy-Item .env.example .env
+```
 
-## Business model (startup track)
+Add your API credentials to `.env`:
 
-Per-mill setup + a percentage of *verified* savings (checker-signed), sold
-first to multi-machine dyeing/finishing mills in Faisalabad — plants with
-real scheduling freedom, unlike single-job power looms.
+```env
+BASETEN_API_KEY=your_key
+FIREWORKS_API_KEY=your_key
+```
+
+Never commit your `.env` file.
+
+### 5. Run the tests
+
+```bash
+python -m pytest tests -q
+```
+
+The project includes 19 tests. Model API credentials are not required for the test suite.
+
+### 6. Launch Navitas
+
+For live model interaction, configure your provider credentials and run:
+
+```bash
+python scripts/record_demo_answers.py
+python app/server.py
+```
+
+Open:
+
+http://127.0.0.1:8000
+
+The application also supports recorded-answer replay for demonstrations where live inference is unavailable.
+
+See [DEMO_README.md](DEMO_README.md) for replay settings and additional details.
+
+## Reproduce the optimization experiment
+
+With the GECAD input dataset downloaded and dependencies installed:
+
+```bash
+python engine/solve2.py pk 1060 120
+```
+
+Arguments:
+
+- `pk`: illustrative Pakistan time-of-use tariff.
+- `1060`: machine-capacity setting.
+- `120`: solver time limit in seconds.
+
+The solver writes its result and schedule JSON files to the repository root.
+
+The experiment log and generated proof are documented in `results/`. To regenerate the proof from the experiment records:
+
+```bash
+python scripts/regen_proof.py
+```
+
+The proof-generation script requires the benchmark input data and recorded experiment artifacts.
+
+## Assumptions and limitations
+
+We believe transparent limitations are essential when evaluating optimization results.
+
+- **Benchmark scope:** The evaluation uses a three-machine, six-day hang-tag textile production benchmark. It is not a live Pakistani dyeing or finishing mill.
+- **Production quality:** The benchmark assumes that lower-energy machine/task modes produce equivalent output quality. This assumption has not yet been independently confirmed with the dataset authors.
+- **Pakistan tariff:** The Pakistan time-of-use experiment uses illustrative rates of Rs 35.68/kWh peak and Rs 22.83/kWh off-peak. The modeled peak window of 18:30–22:30 and export price of Rs 8.13/kWh remain unverified assumptions.
+- **Baseline:** The comparison baseline is the project's tariff-blind, fastest-mode, earliest-deadline-first schedule.
+- **Optimality:** A feasible schedule is not necessarily a proven global optimum. The reported experiments include non-zero optimality gaps; the proof document provides the relevant solver details.
+- **Deployment:** Results are benchmark results, not a claim of verified savings at a commercial factory.
+
+The current system is a decision-support and scheduling prototype. It does not directly control industrial machinery.
+
+## Commercial direction
+
+Navitas is initially designed around multi-machine textile dyeing and finishing operations, where production can be scheduled across machines and time periods.
+
+The intended business model is a per-factory setup combined with a share of independently verified savings.
+
+The longer-term objective is to make industrial energy optimization accessible to manufacturers that cannot afford dedicated optimization and energy-management teams.
+
+## Project structure
+
+```text
+Navitas/
+├── app/                 # Agent, replay system and web application
+├── engine/              # Scheduling, optimization and verification
+├── results/             # Experiment logs and benchmark proof
+├── scripts/             # Experiment and demonstration utilities
+├── tests/               # Automated tests
+├── logs/                # Model-call provenance records
+├── DATA_SOURCES.md      # Dataset provenance and licensing
+├── MODEL_PROVENANCE.md  # Meta model and inference details
+├── DEMO_README.md       # Demo and replay instructions
+├── llm.py               # Model routing and call logging
+└── requirements.txt     # Python dependencies
+```
+
+## Built with
+
+- [Meta Muse Models](https://ai.meta.com/)
+- [Baseten](https://www.baseten.co/)
+- [Fireworks AI](https://fireworks.ai/)
+- [Google OR-Tools](https://developers.google.com/optimization)
+- [GECAD production scheduling benchmark](https://zenodo.org/records/4106746)
+
+Development involved AI coding assistance. Meta model usage within the application is routed and logged through the project's model-provenance layer.
+
+---
+
+**Navitas — Making factory energy decisions smarter, one production schedule at a time.**
