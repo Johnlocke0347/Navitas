@@ -1,138 +1,680 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Navitas – cut a factory's electricity bill</title>
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101714">
+<title>Navitas | Industrial Energy Intelligence</title>
 <style>
-:root{--bg:#f6f8fa;--card:#fff;--ink:#14202b;--mut:#5d6c7a;--line:#e2e8ee;--acc:#0e9f6e;--accbg:#e5f7ef;--warn:#b7791f;--warnbg:#fdf3dc;--bad:#d64545;--blue:#3b66f5}
-@media (prefers-color-scheme:dark){:root{--bg:#0e1318;--card:#161d24;--ink:#e9eef3;--mut:#93a1ae;--line:#26313b;--acc:#3ecf8e;--accbg:#12301f;--warn:#f5b942;--warnbg:#2c2410;--bad:#ef6b6b;--blue:#6f8fff}}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,Segoe UI,Roboto,sans-serif}
-.wrap{max-width:1240px;margin:0 auto;padding:0 20px}
-header{display:flex;justify-content:space-between;align-items:center;padding:16px 0}
-.logo{font-weight:800;font-size:20px;letter-spacing:.2px}.logo i{color:var(--acc);font-style:normal}
-a.link,button.link{color:var(--mut);background:none;border:0;cursor:pointer;font:inherit;text-decoration:underline}
-.hero{display:grid;grid-template-columns:1.15fr 1fr;gap:20px;align-items:stretch;margin-bottom:18px}
-@media(max-width:900px){.hero,.grid{grid-template-columns:1fr!important}}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
-h1{font-size:30px;line-height:1.15;margin:0 0 8px}h2{font-size:16px;margin:0 0 2px}.sub{color:var(--mut);font-size:13px}
-.big{display:flex;gap:18px;align-items:flex-end;margin:14px 0 8px;flex-wrap:wrap}
-.num small{display:block;color:var(--mut);font-size:12px;text-transform:uppercase;letter-spacing:.6px}.num b{font-size:34px;line-height:1.1}
-.num.after b{color:var(--acc)}.arrow{font-size:26px;color:var(--mut);padding-bottom:6px}
-.pill{display:inline-block;background:var(--accbg);color:var(--acc);font-weight:800;border-radius:999px;padding:4px 12px;font-size:15px}
-.ok{color:var(--acc);font-weight:700}.no{color:var(--bad);font-weight:700}
-.steps{display:flex;flex-direction:column;gap:12px;justify-content:center}.step{display:flex;gap:12px}.step span{flex:0 0 28px;height:28px;border-radius:50%;background:var(--accbg);color:var(--acc);font-weight:800;display:flex;align-items:center;justify-content:center}
-.grid{display:grid;grid-template-columns:400px 1fr;gap:20px}
-.scen{display:grid;gap:8px;margin:12px 0}.scen button{text-align:left;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:10px 12px;cursor:pointer;font:inherit}
-.scen button:hover{border-color:var(--acc)}.scen b{display:block}.scen small{color:var(--mut)}
-#msgs{display:flex;flex-direction:column;gap:10px;max-height:420px;overflow:auto;margin-bottom:10px}
-.m{padding:10px 12px;border-radius:10px;background:var(--bg)}.m.u{background:var(--accbg);align-self:flex-end}
-.tag{display:inline-block;font-size:11px;font-weight:700;padding:1px 8px;border-radius:999px;margin-bottom:5px}
-.t-live{background:var(--accbg);color:var(--acc)}.t-rec{background:var(--warnbg);color:var(--warn)}.t-tpl{background:#fde8e8;color:var(--bad)}
-.how{margin:6px 0 0;padding-left:18px;color:var(--mut);font-size:13px}details{margin-top:6px;font-size:12px;color:var(--mut)}pre{white-space:pre-wrap;font-size:11px;margin:4px 0}
-.row{display:flex;gap:8px}input[type=text]{flex:1;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:9px;padding:9px 11px;font:inherit}
-button.go{background:var(--acc);color:#fff;border:0;border-radius:9px;padding:9px 16px;font-weight:700;cursor:pointer}
-.seg button{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:5px 12px;cursor:pointer;font:inherit}.seg button:first-child{border-radius:8px 0 0 8px}.seg button:last-child{border-radius:0 8px 8px 0;border-left:0}.seg button.on{background:var(--ink);color:var(--card)}
-svg text{fill:var(--mut);font-size:10px}.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--mut);margin-top:8px}.legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;vertical-align:-1px}
-.bar{display:grid;grid-template-columns:120px 1fr 100px;gap:10px;align-items:center;margin:5px 0;font-size:13px}.track{height:9px;border-radius:5px;background:var(--line);position:relative}.track i,.track u{position:absolute;left:0;top:0;bottom:0;border-radius:5px}.track i{background:var(--blue);opacity:.35}.track u{background:var(--acc)}
-.insight{background:var(--accbg);border-radius:10px;padding:8px 12px;margin-top:10px;font-size:13px}
-footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:18px 0 28px;color:var(--mut);font-size:12px}
-.spin{display:none;color:var(--warn);font-size:13px}
-#modal{position:fixed;inset:0;background:#0008;display:none;align-items:center;justify-content:center;padding:20px}#modal .card{max-width:560px}#modal li{margin:6px 0}
-</style></head><body><div class="wrap">
-<header><div class="logo"><i>●</i> Navitas</div><button class="link" id="about">About these numbers</button></header>
-
-<section class="hero">
-  <div class="card">
-    <h1>Same work. Smaller electricity bill.</h1>
-    <div class="sub" id="scenTitle">A textile finishing line, 3 machines, 6 days. Navitas decides which machine does what, and when.</div>
-    <div class="big" id="big"></div>
-    <div id="verdict"></div>
-  </div>
-  <div class="card steps">
-    <div class="step"><span>1</span><div><b>You describe a problem in plain words</b><div class="sub">"A machine broke down." "No work during expensive evening hours."</div></div></div>
-    <div class="step"><span>2</span><div><b>Muse Spark turns it into rules and runs the optimiser</b><div class="sub">Meta's open model does the understanding. A proven maths solver finds the cheapest plan.</div></div></div>
-    <div class="step"><span>3</span><div><b>A separate checker verifies the plan</b><div class="sub">No double-booked machine, every deadline met. The AI never grades its own work.</div></div></div>
-  </div>
-</section>
-
-<section class="grid">
-  <div class="card">
-    <h2>Try a "what if"</h2><div class="sub">Pick one, or type your own.</div>
-    <div class="scen" id="scen"></div>
-    <div id="msgs"></div>
-    <div class="row"><input type="text" id="q" placeholder="e.g. Machine 118 is down on day 5"><button class="go" id="send">Ask</button></div>
-    <div class="row" style="margin-top:10px;align-items:center;flex-wrap:wrap"><label class="link" style="cursor:pointer">📷 Read prices from a bill photo<input id="file" type="file" accept="image/*" hidden></label><button class="link" id="sample">or try the sample sheet</button><span class="spin" id="spin">working…</span></div>
+:root{
+--bg:#111315;--panel:#191c1f;--panel2:#202428;--panel3:#292e33;
+--line:#343a3e;--text:#edf0ee;--muted:#a5aeaa;--dim:#78827d;
+--mint:#a8dfbd;--green:#68b98a;--amber:#d9b477;--red:#df8585;
+--radius:14px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+button,input{font:inherit}
+button{cursor:pointer}
+.app{min-height:100vh;display:grid;grid-template-columns:225px minmax(0,1fr)}
+.sidebar{background:#0e1511;border-right:1px solid var(--line);padding:23px 15px;display:flex;flex-direction:column;gap:28px;position:sticky;top:0;height:100vh}
+.brand{display:flex;align-items:center;gap:11px;padding:0 9px}
+.brand-mark{width:35px;height:35px;border-radius:10px;background:var(--mint);display:grid;place-items:center;color:#0d2116;font-weight:900;font-size:20px}
+.brand-name{font-size:18px;font-weight:750;letter-spacing:-.5px}
+.brand-sub{font-size:10px;color:var(--dim);letter-spacing:1.3px;text-transform:uppercase}
+.nav-label{font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:var(--dim);padding:0 11px;margin-bottom:7px}
+.nav{display:grid;gap:5px}
+.nav button{width:100%;border:0;background:transparent;color:var(--muted);padding:11px;border-radius:9px;text-align:left;display:flex;align-items:center;gap:11px;font-size:13px}
+.nav button:hover,.nav button.active{background:#1b2a21;color:var(--text)}
+.nav button.active{box-shadow:inset 2px 0 var(--mint)}
+.nav-ico{width:17px;color:var(--mint)}
+.sidebar-bottom{margin-top:auto;display:grid;gap:12px}
+.benchmark-tag{padding:13px;border:1px solid var(--line);border-radius:11px;background:#121b16}
+.benchmark-tag strong{display:block;font-size:12px;margin-bottom:4px}
+.benchmark-tag span{color:var(--muted);font-size:11px}
+.sidebar-foot{padding:0 8px;color:var(--dim);font-size:10px}
+main{min-width:0;padding:0 32px 45px;max-width:1550px;width:100%;margin:auto}
+.topbar{height:72px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:18px}
+.crumb{color:var(--muted);font-size:12px}
+.crumb b{color:var(--text)}
+.top-actions{display:flex;align-items:center;gap:10px}
+.status-pill{display:flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:99px;padding:7px 11px;color:var(--muted);font-size:11px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--green)}
+.icon-btn{border:1px solid var(--line);background:var(--panel);color:var(--muted);padding:8px 11px;border-radius:9px}
+.page-head{padding:30px 0 22px;display:flex;justify-content:space-between;align-items:flex-end;gap:20px}
+.eyebrow{color:var(--mint);font-size:10px;text-transform:uppercase;letter-spacing:1.8px;font-weight:700}
+.page-head h1{font-size:29px;line-height:1.15;letter-spacing:-1px;margin:7px 0 8px;font-weight:680}
+.page-head p{color:var(--muted);margin:0;max-width:650px;font-size:13px}
+.head-meta{display:flex;gap:8px;flex-wrap:wrap}
+.tag{border:1px solid var(--line);color:var(--muted);padding:6px 9px;border-radius:7px;font-size:10px}
+.tag.live{border-color:#315b43;color:var(--mint);background:#13231a}
+.section-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:27px 0 13px}
+.section-title h2{font-size:14px;margin:0;font-weight:650}
+.section-title span{color:var(--dim);font-size:11px}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius)}
+.kpi{padding:17px 18px;min-height:122px}
+.kpi-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:11px}
+.kpi-icon{width:27px;height:27px;display:grid;place-items:center;border-radius:8px;background:var(--panel3);color:var(--mint)}
+.kpi-value{font-size:27px;font-weight:700;letter-spacing:-1px;margin:12px 0 2px;font-variant-numeric:tabular-nums}
+.kpi-foot{font-size:10px;color:var(--dim)}
+.kpi-foot.good{color:var(--mint)}
+.kpi.accent{border-color:#355641;background:linear-gradient(145deg,#14231a,#111916 70%)}
+.kpi.accent .kpi-value{color:var(--mint)}
+.layout-two{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(300px,.85fr);gap:14px}
+.panel{padding:18px}
+.panel-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:16px}
+.panel-head h3{font-size:13px;margin:0 0 4px;font-weight:650}
+.panel-head p{margin:0;color:var(--muted);font-size:11px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--muted);font-size:10px;margin:4px 0 13px}
+.legend i{display:inline-block;width:7px;height:7px;border-radius:2px;margin-right:5px;background:var(--mint)}
+.legend i.base{background:#66766c}
+.cost-compare{display:grid;gap:15px}
+.cost-row{display:grid;grid-template-columns:83px minmax(0,1fr) 100px;gap:10px;align-items:center}
+.cost-label{font-size:11px;color:var(--muted)}
+.track{height:10px;background:#202b25;border-radius:99px;overflow:hidden}
+.fill{height:100%;border-radius:99px;background:#64766b;width:0;transition:width .4s}
+.fill.opt{background:var(--green)}
+.cost-number{text-align:right;font-size:12px;font-weight:650;font-variant-numeric:tabular-nums}
+.compare-foot{display:flex;justify-content:space-between;gap:12px;padding-top:14px;border-top:1px solid var(--line);margin-top:15px;color:var(--muted);font-size:10px}
+.compare-foot strong{color:var(--mint);font-size:13px}
+.verification{display:grid;gap:10px}
+.verify-row{display:flex;align-items:center;justify-content:space-between;padding:11px 12px;background:#0e1511;border:1px solid var(--line);border-radius:9px}
+.verify-left{display:flex;gap:9px;align-items:center}
+.verify-icon{width:25px;height:25px;border-radius:7px;background:#1b2b21;color:var(--mint);display:grid;place-items:center}
+.verify-row strong{display:block;font-size:11px}
+.verify-row small{color:var(--dim);font-size:10px}
+.verify-count{font-size:16px;font-weight:700}
+.verify-count.pass{color:var(--mint)}
+.verify-note{color:var(--muted);font-size:10px;line-height:1.55;padding:9px 2px 0}
+.gantt-panel{margin-top:14px;padding:18px;overflow:hidden}
+.gantt-wrap{overflow-x:auto;padding-bottom:5px}
+.gantt{min-width:760px}
+.gantt-axis{display:grid;grid-template-columns:95px minmax(0,1fr);gap:10px;margin-bottom:8px}
+.axis-days{display:grid;grid-template-columns:repeat(6,1fr);font-size:10px;color:var(--muted)}
+.axis-days span{border-left:1px solid #34463b;padding-left:7px}
+.machine-lane{display:grid;grid-template-columns:95px minmax(0,1fr);gap:10px;align-items:center;margin:9px 0}
+.machine-name{font-size:11px;color:var(--muted);font-weight:600}
+.lane-track{height:37px;position:relative;border-radius:7px;background:repeating-linear-gradient(to right,transparent 0,transparent calc(16.666% - 1px),#29372f calc(16.666% - 1px),#29372f 16.666%),#101713;border:1px solid #26342c}
+.bar{position:absolute;top:5px;height:25px;min-width:3px;border-radius:5px;background:#397e58;color:#eaffef;font-size:9px;line-height:25px;padding:0 5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border:1px solid #5aa47788}
+.bar.alt{background:#53665a;border-color:#778b7d88}
+.empty-state{padding:25px;text-align:center;color:var(--muted);font-size:12px;border:1px dashed #34463b;border-radius:10px}
+.select-tabs{display:flex;gap:3px;background:#0b120e;padding:3px;border:1px solid var(--line);border-radius:8px}
+.select-tabs button{border:0;background:transparent;color:var(--muted);font-size:10px;padding:6px 9px;border-radius:6px}
+.select-tabs button.active{background:#293b30;color:var(--text)}
+.lower-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(300px,.8fr);gap:14px;margin-top:14px}
+.copilot{padding:0;display:flex;flex-direction:column;min-height:370px}
+.copilot-head{padding:17px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+.copilot-title{display:flex;align-items:center;gap:10px}
+.spark{width:29px;height:29px;border-radius:9px;background:#1e3828;color:var(--mint);display:grid;place-items:center}
+.copilot-title strong{font-size:12px;display:block}
+.copilot-title small{color:var(--dim);font-size:10px}
+.messages{padding:17px 18px;display:flex;flex-direction:column;gap:12px;flex:1;max-height:300px;overflow:auto}
+.message{max-width:92%;font-size:12px;line-height:1.6;padding:11px 13px;border-radius:11px;white-space:pre-wrap}
+.message.bot{background:#1a2720;border:1px solid #2b3d32;color:#dce9df;align-self:flex-start}
+.message.user{background:#244b35;color:#effff3;align-self:flex-end}
+.message.system{align-self:center;color:var(--dim);font-size:10px}
+.composer{padding:13px 15px;border-top:1px solid var(--line)}
+.prompt-chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.chip{border:1px solid #34463b;background:transparent;color:var(--muted);font-size:10px;border-radius:99px;padding:5px 9px}
+.chip:hover{color:var(--mint);border-color:#4d7d5d}
+.compose-row{display:flex;gap:8px}
+.compose-row input{flex:1;min-width:0;background:#0b120e;border:1px solid #34463b;border-radius:9px;padding:11px 12px;color:var(--text);outline:none;font-size:12px}
+.compose-row input:focus{border-color:#5c9a70}
+.send{border:0;border-radius:9px;background:var(--mint);color:#0d2116;padding:0 16px;font-size:12px;font-weight:750}
+.send:disabled{opacity:.5;cursor:wait}
+.side-stack{display:grid;gap:14px;align-content:start}
+.scenario-panel,.bill-panel,.trace-panel{padding:17px}
+.scenario-buttons{display:grid;gap:7px}
+.scenario{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;border:1px solid var(--line);background:#0e1511;color:var(--text);padding:11px 12px;border-radius:9px;text-align:left}
+.scenario:hover{border-color:#557b60}
+.scenario strong{display:block;font-size:11px;font-weight:600}
+.scenario small{display:block;color:var(--dim);font-size:10px;margin-top:2px}
+.scenario em{color:var(--mint);font-size:15px;font-style:normal}
+.upload{display:block;border:1px dashed #34463b;border-radius:10px;padding:17px;text-align:center;color:var(--muted);font-size:11px;cursor:pointer;background:#0e1511}
+.upload:hover{border-color:#5c9a70}
+.upload input{display:none}
+.upload strong{display:block;color:var(--text);font-size:11px;margin-bottom:3px}
+.bill-result{font-size:10px;color:var(--muted);margin-top:10px;line-height:1.5}
+.trace-list{display:grid;gap:8px}
+.trace-item{padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:#0e1511;font-size:10px;color:var(--muted)}
+.trace-item strong{color:var(--text);font-size:10px}
+.trace-item .ok{color:var(--mint)}
+.disclosure{margin-top:18px;border:1px solid var(--line);background:#101713;border-radius:12px;padding:14px 16px}
+.disclosure summary{cursor:pointer;color:var(--muted);font-size:11px;font-weight:600}
+.disclosure-content{padding-top:12px;color:var(--muted);font-size:10px;line-height:1.7}
+.footer{display:flex;justify-content:space-between;gap:14px;margin-top:22px;padding-top:15px;border-top:1px solid var(--line);color:var(--dim);font-size:10px}
+.toast{position:fixed;bottom:20px;right:22px;z-index:5;background:#1a2a20;border:1px solid #42644d;color:var(--text);padding:11px 15px;border-radius:9px;font-size:12px;display:none;max-width:420px}
+.loading{opacity:.65;pointer-events:none}
+@media(max-width:1100px){.app{grid-template-columns:200px minmax(0,1fr)}main{padding:0 20px 35px}.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.layout-two,.lower-grid{grid-template-columns:1fr}.side-stack{grid-template-columns:repeat(2,minmax(0,1fr))}.trace-panel{grid-column:1/-1}}
+@media(max-width:720px){.app{display:block}.sidebar{position:relative;height:auto;padding:12px 15px;border-right:0;border-bottom:1px solid var(--line);gap:12px}.brand{padding:0}.nav-label,.sidebar-bottom{display:none}.nav{display:flex;overflow:auto}.nav button{width:auto;white-space:nowrap;padding:8px 10px}.nav button.active{box-shadow:inset 0 -2px var(--mint)}main{padding:0 14px 28px}.topbar{height:55px}.page-head{display:block;padding:23px 0 16px}.page-head h1{font-size:25px}.head-meta{margin-top:13px}.kpis{gap:8px}.kpi{padding:13px;min-height:108px}.kpi-value{font-size:23px}.side-stack{grid-template-columns:1fr}.footer{display:block}.footer span{display:block;margin:4px 0}.panel{padding:14px}.cost-row{grid-template-columns:68px minmax(0,1fr) 83px}.status-pill{display:none}}
+.sidebar{background:#171a1c}.nav button:hover,.nav button.active{background:#252b2e}.nav button.active{box-shadow:inset 2px 0 #91bca3}.nav-ico{color:var(--muted)}.kpi.accent{border-color:#3d5146;background:linear-gradient(145deg,#242b27,#171d25 70%)}.fill.opt,.bar{background:#56896c}.bar{border-color:#8cbea0;color:#f1f5f8}.message.bot{background:#222725;border-color:#3b4940}.message.user{background:#354a3d;color:#f0f4f7}.send{background:#a8dfbd;color:#172019}.brand-mark{display:none!important}.brand-name{font-size:19px;letter-spacing:1.5px;font-weight:750}
+.kpis{gap:14px}.kpi{padding:20px 20px;min-height:136px;border:1px solid #343a3e;border-radius:12px;background:linear-gradient(155deg,#202427,#191c1f 75%);transition:border-color .2s,transform .2s}.kpi:hover{border-color:#59645e;transform:translateY(-2px)}.kpi-top{font-size:11px;font-weight:600;letter-spacing:.35px;text-transform:uppercase}.kpi-icon{width:28px;height:28px;border:1px solid #39423d;background:#252b28;color:#a8dfbd;font-size:10px;font-weight:700}.kpi-value{font-size:30px;font-weight:750;letter-spacing:-1.2px;margin:15px 0 4px;color:#edf0ee}.kpi-foot{font-size:10px;letter-spacing:.1px}.kpi.accent{background:linear-gradient(145deg,#26352c,#1b211d 75%);border-color:#587361;box-shadow:inset 0 1px rgba(168,223,189,.08)}.kpi.accent .kpi-value{color:#b6e6c6}.kpi.accent .kpi-icon{background:#304538;border-color:#496653}.kpi.accent .kpi-foot.good{color:#a8dfbd}
+.gantt-panel{padding:22px;background:linear-gradient(160deg,#1d2222,#191c1f);border-color:#353d39}.gantt-wrap{padding:8px 2px 12px}.gantt{min-width:820px}.gantt-axis{margin-bottom:12px;padding-bottom:9px;border-bottom:1px solid #39413d}.machine-lane{margin:12px 0;min-height:40px}.machine-name{font-size:11px;font-weight:700;color:#d2dad5;letter-spacing:.25px}.bar{top:6px;height:27px;line-height:25px;border-radius:5px;background:#47785b;border:1px solid #78a889;color:#f2f7f3;font-size:10px;font-weight:650;box-shadow:0 2px 5px #0003}.bar.alt{background:#505e56;border-color:#7c8d82;color:#f0f3f0}.gantt-axis,.machine-lane{position:relative}.gantt-axis{color:#9ca9a1}.gantt-wrap::-webkit-scrollbar{height:8px}.gantt-wrap::-webkit-scrollbar-track{background:#202522;border-radius:8px}.gantt-wrap::-webkit-scrollbar-thumb{background:#56645a;border-radius:8px}.empty-state{color:#9ca9a1;padding:25px;text-align:center}
+.verify-row{padding:14px 13px;margin:9px 0;background:#202522;border:1px solid #39423d;border-radius:10px;transition:border-color .2s}.verify-row:hover{border-color:#617267}.verify-icon{width:29px;height:29px;border-radius:8px;background:#2b3c30;color:#b6e6c6;font-size:11px;font-weight:800}.verify-row strong{font-size:12px;font-weight:700;letter-spacing:.1px}.verify-row small{display:block;margin-top:3px;font-size:10px;color:#9ca9a1}.verify-count{font-size:19px;font-weight:750;font-variant-numeric:tabular-nums}.verify-count.pass{color:#a8dfbd}.verify-note{margin-top:8px;padding:11px 12px;background:#1b211d;border:1px solid #343f37;border-radius:8px;color:#aab6ae;font-size:11px;line-height:1.65}.trace-item{padding:11px 12px;background:#202522;border-color:#39423d;border-radius:9px;font-size:11px}.trace-item strong{font-size:11px}.trace-item .ok{color:#a8dfbd}.status-pill{background:#202522;border-color:#39423d;color:#c1cbc4;font-weight:600}
+.messages{padding:20px;gap:14px;max-height:340px;scrollbar-width:thin;scrollbar-color:#536158 transparent}.message{max-width:88%;padding:13px 15px;border-radius:12px;font-size:12px;line-height:1.7}.message.bot{background:linear-gradient(145deg,#252c28,#202522);border:1px solid #3b4740;color:#e0e8e2}.message.user{background:#354a3d;border:1px solid #526b58;color:#f0f5f1}.message.system{font-size:10px;letter-spacing:.3px}.composer{padding:16px;border-top:1px solid #343d37;background:#191e1b}.chip{padding:7px 11px;border-color:#414c44;background:#202522;color:#b5c0b8;font-size:10px;transition:all .18s}.chip:hover{color:#c4ebd0;border-color:#789681;background:#29362d}.compose-row{gap:10px;margin-top:10px}.compose-row input{background:#111614;border:1px solid #3c4840;border-radius:10px;padding:13px 14px;font-size:12px}.compose-row input:focus{border-color:#88b49a;box-shadow:0 0 0 3px #88b49a18}.send{border-radius:10px;padding:0 19px;background:#a8dfbd;color:#172019;font-weight:750;transition:filter .18s,transform .18s}.send:hover{filter:brightness(1.07);transform:translateY(-1px)}.scenario-panel,.bill-panel{background:#1b201e}.scenario-buttons{gap:9px}.scenario{padding:13px 14px;background:#202522;border-color:#39443d;border-radius:10px;transition:all .18s}.scenario:hover{background:#27332b;border-color:#789681;transform:translateX(2px)}.scenario strong{font-size:12px}.scenario small{font-size:10px;line-height:1.5}.scenario em{color:#b6e6c6;font-weight:700}.upload{padding:21px 16px;background:#202522;border-color:#53675a;border-radius:11px;transition:all .18s}.upload:hover{background:#27332b;border-color:#a8dfbd}.upload strong{font-size:12px}.bill-result{padding:10px;background:#202522;border:1px solid #39443d;border-radius:8px;font-size:11px}
+main{min-width:0}.app{grid-template-columns:232px minmax(0,1fr)}.layout-two,.lower-grid{min-width:0;gap:16px}.panel,.kpi,.side-stack{min-width:0}.panel{border-radius:13px}.topbar{min-width:0}.page-head{gap:16px}@media(max-width:1100px){.app{grid-template-columns:190px minmax(0,1fr)}main{padding-left:20px;padding-right:20px}.layout-two,.lower-grid{grid-template-columns:minmax(0,1fr)}.side-stack{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:900px){.app{grid-template-columns:170px minmax(0,1fr)}main{padding-left:16px;padding-right:16px}.sidebar{padding-left:12px;padding-right:12px}.layout-two,.lower-grid{grid-template-columns:minmax(0,1fr)}.side-stack{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:720px){.app{display:block}.sidebar{position:relative;height:auto;min-height:0}.nav{padding-bottom:3px}.nav button{flex:0 0 auto}.topbar{gap:8px}.page-head h1{line-height:1.15}.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.layout-two,.lower-grid,.side-stack{grid-template-columns:minmax(0,1fr)}.panel{padding:14px}.messages{max-height:280px}.footer{line-height:1.6}}@media(max-width:420px){main{padding-left:11px;padding-right:11px}.kpi{padding:11px;min-height:98px}.kpi-value{font-size:21px}.panel-head{gap:8px}.panel-head p{line-height:1.5}.compose-row{flex-wrap:wrap}.compose-row input{width:100%;flex-basis:100%}.send{min-height:40px;margin-left:auto}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand">
+    
+    <div><div class="brand-name">NAVITAS</div><div class="brand-sub">Industrial intelligence</div></div>
   </div>
   <div>
-    <div class="card">
-      <div class="row" style="justify-content:space-between;align-items:flex-start;flex-wrap:wrap"><div><h2>Who does what, and when</h2><div class="sub">Each bar is a job on a machine. Yellow bands are the expensive evening hours.</div></div>
-      <span class="seg"><button id="tb">Before</button><button id="to" class="on">After (Navitas)</button></span></div>
-      <svg id="gantt" width="100%" viewBox="0 0 1150 190" preserveAspectRatio="xMinYMin meet"></svg><div class="legend" id="legend"></div>
-    </div>
-    <div class="card" style="margin-top:20px"><h2>Where the energy is saved</h2><div class="sub">Kilowatt-hours used by each step of the process, before (faint) and after (green).</div><div id="bytask" style="margin-top:8px"></div><div class="insight" id="insight"></div></div>
+    <div class="nav-label">Workspace</div>
+    <nav class="nav">
+      <button class="active" data-target="overview"><span class="nav-ico">01</span>Overview</button>
+      <button data-target="planner"><span class="nav-ico">02</span>Production planner</button>
+      <button data-target="copilot"><span class="nav-ico">03</span>AI copilot</button>
+      <button data-target="verification"><span class="nav-ico">04</span>Verification</button>
+    </nav>
   </div>
-</section>
+  <div class="sidebar-bottom">
+    <div class="benchmark-tag"><strong>Benchmark environment</strong><span>GECAD textile production cell<br>3 machines  /  6 operating days</span></div>
+    <div class="sidebar-foot">DEMO BUILD  /  NO FACTORY CONTROL CONNECTION</div>
+  </div>
+</aside>
+<main>
+  <header class="topbar">
+    <div class="crumb">Workspace / <b>Energy optimisation</b></div>
+    <div class="top-actions">
+      <div class="status-pill"><span class="dot"></span><span id="connectionLabel">Connecting to engine</span></div>
+      <button class="icon-btn" id="refreshBtn" title="Refresh data">Refresh</button>
+    </div>
+  </header>
 
-<footer><span id="prov"></span><span>Built with Meta's Muse Spark Open · real data: GECAD production-line benchmark</span></footer>
+  <section id="overview">
+    <div class="page-head">
+      <div>
+        <div class="eyebrow">Industrial energy intelligence</div>
+        <h1>Production, scheduled intelligently.</h1>
+        <p>Translate operating constraints into a lower-cost production plan - while keeping factory rules visible and verifiable.</p>
+      </div>
+      <div class="head-meta">
+        <span class="tag">GECAD  /  3-machine benchmark</span>
+        <span class="tag" id="sourceTag">Awaiting data</span>
+      </div>
+    </div>
+
+    <div class="kpis">
+      <article class="card kpi accent">
+        <div class="kpi-top"><span>Modelled cost reduction</span><span class="kpi-icon">INFO</span></div>
+        <div class="kpi-value" id="savingValue">-</div>
+        <div class="kpi-foot good" id="savingFoot">Compared with same-constraints baseline</div>
+      </article>
+      <article class="card kpi">
+        <div class="kpi-top"><span>Optimised energy cost</span><span class="kpi-icon">INFO</span></div>
+        <div class="kpi-value" id="costValue">-</div>
+        <div class="kpi-foot">Illustrative tariff scenario</div>
+      </article>
+      <article class="card kpi">
+        <div class="kpi-top"><span>Energy consumption</span><span class="kpi-icon">INFO</span></div>
+        <div class="kpi-value" id="energyValue">-</div>
+        <div class="kpi-foot">Optimised schedule</div>
+      </article>
+      <article class="card kpi">
+        <div class="kpi-top"><span>Peak demand</span><span class="kpi-icon">INFO</span></div>
+        <div class="kpi-value" id="peakValue">-</div>
+        <div class="kpi-foot">Optimised schedule  /  kW</div>
+      </article>
+    </div>
+
+    <div class="section-title"><h2>Energy cost analysis</h2><span id="comparisonLabel">Baseline vs optimised  /  same constraints</span></div>
+    <div class="layout-two">
+      <article class="card panel">
+        <div class="panel-head">
+          <div><h3>Cost comparison</h3><p>Cost recalculated using the selected tariff assumptions.</p></div>
+          <span class="tag">PKR</span>
+        </div>
+        <div class="legend"><span><i class="base"></i>Baseline</span><span><i></i>Optimised</span></div>
+        <div class="cost-compare">
+          <div class="cost-row"><div class="cost-label">Baseline</div><div class="track"><div class="fill" id="baselineBar"></div></div><div class="cost-number" id="baselineCost">-</div></div>
+          <div class="cost-row"><div class="cost-label">Optimised</div><div class="track"><div class="fill opt" id="optimizedBar"></div></div><div class="cost-number" id="optimizedCost">-</div></div>
+        </div>
+        <div class="compare-foot"><span id="comparisonNote">Loading comparison...</span><strong id="savingAmount">-</strong></div>
+      </article>
+      <article class="card panel" id="verification">
+        <div class="panel-head">
+          <div><h3>Independent verification</h3><p>Solver output checked against operating rules.</p></div>
+          <span class="tag" id="verifyBadge">Pending</span>
+        </div>
+        <div class="verification">
+          <div class="verify-row"><div class="verify-left"><div class="verify-icon">OK</div><div><strong>Dataset rule violations</strong><small>Original production constraints</small></div></div><div class="verify-count pass" id="datasetViolations">-</div></div>
+          <div class="verify-row"><div class="verify-left"><div class="verify-icon">âŒ‘</div><div><strong>Requested constraint violations</strong><small>Rules added in this scenario</small></div></div><div class="verify-count pass" id="userViolations">-</div></div>
+          <div class="verify-note" id="verifyNote">Verification status will appear after the first schedule is loaded.</div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="planner">
+    <div class="section-title"><h2>Production schedule</h2><span>Six operating days  /  07:00-23:00 per day</span></div>
+    <article class="card gantt-panel">
+      <div class="panel-head">
+        <div><h3>Machine utilisation timeline</h3><p>Each bar represents a scheduled production task.</p></div>
+        <div class="select-tabs"><button class="active" data-view="optimized">Optimised</button><button data-view="baseline">Baseline</button></div>
+      </div>
+      <div class="legend"><span><i></i>Optimised task</span><span><i class="base"></i>Baseline task</span></div>
+      <div class="gantt-wrap" id="ganttContainer"><div class="empty-state">Loading production schedule...</div></div>
+    </article>
+  </section>
+
+  <section id="copilot">
+    <div class="section-title"><h2>Optimisation workspace</h2><span>Describe a production constraint in plain language</span></div>
+    <div class="lower-grid">
+      <article class="card copilot">
+        <div class="copilot-head">
+          <div class="copilot-title"><div class="spark">AI</div><div><strong>Navitas copilot</strong><small>Muse Spark interprets  /  CP-SAT optimises  /  checker verifies</small></div></div>
+          <span class="tag" id="agentMode">Ready</span>
+        </div>
+        <div class="messages" id="messages">
+          <div class="message bot">Hi. Tell me what changed on the factory floor. For example: take machine 119 offline on day 3, or avoid running production during the evening peak. I'll translate that into constraints and request a verified schedule.</div>
+        </div>
+        <div class="composer">
+          <div class="prompt-chips">
+            <button class="chip" data-prompt="Machine 119 is unavailable on day 3">Machine 119 down  /  Day 3</button>
+            <button class="chip" data-prompt="Avoid all production from 18:30 to 22:30 on every day">Avoid evening peak</button>
+            <button class="chip" data-prompt="Recalculate the best schedule with no additional constraints">Unconstrained plan</button>
+          </div>
+          <div class="compose-row"><input id="promptInput" type="text" placeholder="e.g. Machine 118 is down on day 2..." autocomplete="off"><button class="send" id="sendBtn">Optimise</button></div>
+        </div>
+      </article>
+
+      <div class="side-stack">
+        <article class="card scenario-panel">
+          <div class="panel-head"><div><h3>Quick scenarios</h3><p>Apply a benchmark scenario.</p></div></div>
+          <div class="scenario-buttons">
+            <button class="scenario" data-preset="base"><span><strong>Standard operation</strong><small>No additional constraints</small></span><em>Run</em></button>
+            <button class="scenario" data-preset="maq119"><span><strong>Machine 119 unavailable</strong><small>Offline for operating day 3</small></span><em>Run</em></button>
+            <button class="scenario" data-preset="peak"><span><strong>Evening peak restriction</strong><small>Avoid all work  /  18:30-22:30</small></span><em>Run</em></button>
+          </div>
+        </article>
+
+        <article class="card bill-panel">
+          <div class="panel-head"><div><h3>Read an electricity bill</h3><p>Extract printed tariff values from an image.</p></div><span class="tag">Vision</span></div>
+          <label class="upload"><input type="file" id="billFile" accept="image/*"><strong>+ Upload bill image</strong>PNG, JPG or WebP  /  image only</label>
+          <div class="bill-result" id="billResult">Extracted values are shown for review. They are not applied until validated by the backend.</div>
+        </article>
+
+        <article class="card trace-panel">
+          <div class="panel-head"><div><h3>Execution trace</h3><p>What happened behind the result.</p></div><span class="tag" id="callCount">0 calls</span></div>
+          <div class="trace-list" id="traceList"><div class="trace-item">No tool calls recorded yet.</div></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <details class="disclosure">
+    <summary>Benchmark methodology & assumptions</summary>
+    <div class="disclosure-content">
+      Navitas is demonstrated on a public GECAD textile hang-tag production dataset with three machines over six operating days. The optimiser produces a schedule; an independent checker evaluates dataset rules and user-added constraints. The Pakistani tariff scenario uses illustrative peak/off-peak rates and an assumed peak window; these inputs are not a substitute for a factory's current electricity tariff. Lower-energy machine modes are treated as equivalent in production quality, but that equivalence has not been confirmed by the dataset authors. Results are modelled benchmark outputs, not measured savings from a commercial factory deployment. Navitas is decision-support software and does not directly control factory machinery.
+    </div>
+  </details>
+  <footer class="footer"><span>Navitas  /  Industrial energy intelligence</span><span>Benchmark demonstration  /  No factory control connection</span></footer>
+</main>
 </div>
-
-<div id="modal"><div class="card"><h2>About these numbers</h2><ul>
-<li><b>Real benchmark, not a live factory.</b> The jobs and machine energy profiles come from a published production line (3 machines, 6 days).</li>
-<li><b>Sample tariff.</b> Prices are Pakistani industrial rates as reported in news (Rs35.68 peak, Rs22.83 off-peak). The 18:30–22:30 peak window is our assumption.</li>
-<li><b>Low-energy settings.</b> Most of the saving comes from running a step in its lower-energy setting. We assume it makes the same product; this is not yet confirmed with the data authors.</li>
-<li><b>"Before" is our own baseline:</b> a simple schedule that always picks the fastest setting and ignores prices.</li></ul>
-<div style="text-align:right"><button class="go" id="closeabout">Got it</button></div></div></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
-const COL={"Ironing":"#4f7bff","Anti-Shrinkage":"#a86bff","Sublimation":"#f0b030","Harden[0.5]":"#39c98a","Harden[1]":"#13967a","Harden[1.5]":"#f0875f","Harden[2]":"#e85c5c"};
-const MN=["MAQ118","MAQ119","MAQ120"], mname=m=>"Machine "+m.slice(3);
-let R=null, view="optimized";
-const $=s=>document.querySelector(s), fmt=n=>Number(n).toLocaleString(undefined,{maximumFractionDigits:0});
-const esc=s=>String(s).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
-function describe(cs){return (cs||[]).map(c=>c.type==="machine_down"?`${mname(c.machine)} offline on day ${c.day}`:`${c.task==="*"?"No work":"No "+c.task} between ${c.start} and ${c.end}${c.days==="all"?" every day":""}`).join(" · ")}
-function hero(r){const b=r.baseline,o=r.optimized,ok=r.violations_dataset===0&&r.violations_user===0;
- $("#scenTitle").textContent=r.constraints&&r.constraints.length?"What-if: "+describe(r.constraints):"A textile finishing line, 3 machines, 6 days. Navitas decides which machine does what, and when.";
- $("#big").innerHTML=(b?`<div class="num"><small>Before</small><b>Rs ${fmt(b.cost)}</b></div><div class="arrow">→</div>`:`<div class="num"><small>Before</small><b class="no">can't finish</b></div><div class="arrow">→</div>`)+
-  `<div class="num after"><small>After</small><b>Rs ${fmt(o.cost)}</b></div>`+(r.saving_pct!=null?`<span class="pill">${Math.round(r.saving_pct)}% lower</span>`:"");
- $("#verdict").innerHTML=`<div class="sub">Electricity bill for the 6 days · ${o.kwh} kWh${b?` instead of ${b.kwh}`:""}.${b?"":" The usual fastest-setting schedule can't meet the deadline under this condition; Navitas found one that can."}</div>
-  <div style="margin-top:6px">${ok?`<span class="ok">✓ Plan verified</span> <span class="sub">– no double-booked machine, deadlines met${r.constraints&&r.constraints.length?", your condition respected":""}</span>`:`<span class="no">✗ Plan failed verification</span>`}</div>`}
-function gantt(r){if(view==="baseline"&&!r.baseline){view="optimized";$("#to").className="on";$("#tb").className=""}
- const W=1150,L=86,DW=(W-L)/6,PX=DW/192,RH=44;let h="";const win=(r.tariff&&r.tariff.window)||["18:30","22:30"];
- const k=t=>{const[a,b]=t.split(":").map(Number);return Math.max(0,Math.min(192,(a*60+b-420)/5))};
- for(let d=0;d<6;d++){h+=`<text x="${L+d*DW+4}" y="12">Day ${d+1}</text><line x1="${L+d*DW}" y1="16" x2="${L+d*DW}" y2="170" stroke="#8883"/><rect x="${L+d*DW+k(win[0])*PX}" y="18" width="${(k(win[1])-k(win[0]))*PX}" height="150" fill="#f0b03030"/>`}
- MN.forEach((m,i)=>{h+=`<text x="4" y="${18+i*RH+RH/2+4}">${mname(m)}</text><line x1="${L}" y1="${18+(i+1)*RH}" x2="${W}" y2="${18+(i+1)*RH}" stroke="#8883"/>`});
- (r.constraints||[]).forEach(c=>{if(c.type==="machine_down"){const i=MN.indexOf(c.machine);h+=`<rect x="${L+(c.day-1)*DW}" y="${18+i*RH}" width="${DW}" height="${RH}" fill="#e85c5c55"><title>${mname(c.machine)} offline</title></rect><text x="${L+(c.day-1)*DW+8}" y="${18+i*RH+RH/2+4}" style="fill:#e85c5c;font-weight:700">offline</text>`}
-  else if(c.task==="*"){(c.days==="all"?[1,2,3,4,5,6]:c.days).forEach(d=>{h+=`<rect x="${L+(d-1)*DW+k(c.start)*PX}" y="18" width="${(k(c.end)-k(c.start))*PX}" height="150" fill="#e85c5c33"><title>no work ${c.start}-${c.end}</title></rect>`})}});
- r.gantt[view].forEach(([m,task,tm,s,dur])=>{const i=MN.indexOf(m),d=Math.floor(s/192),o=s-d*192;h+=`<rect x="${L+d*DW+o*PX}" y="${18+i*RH+5}" width="${Math.max(1.2,dur*PX-.6)}" height="${RH-10}" rx="2" fill="${COL[task]||"#999"}"><title>${mname(m)} · ${task} · day ${d+1}</title></rect>`});
- $("#gantt").innerHTML=h;$("#legend").innerHTML=Object.entries(COL).map(([t,c])=>`<span><i style="background:${c}"></i>${t}</span>`).join("")}
-function bytask(r){const b=r.baseline?r.by_task_kwh.baseline:r.by_task_kwh.optimized,o=r.by_task_kwh.optimized,mx=Math.max(...Object.values(b),...Object.values(o));
- $("#bytask").innerHTML=Object.keys(b).map(t=>`<div class="bar"><span>${t}</span><div class="track"><i style="width:${100*b[t]/mx}%"></i><u style="width:${100*(o[t]||0)/mx}%"></u></div><span>${b[t]} → ${o[t]||0} kWh</span></div>`).join("");
- const best=Object.keys(b).map(t=>[t,b[t]-(o[t]||0)]).sort((x,y)=>y[1]-x[1])[0];
- $("#insight").textContent=r.baseline&&best&&best[1]>1?`Biggest saving: the "${best[0]}" step uses ${Math.round(best[1])} kWh less, by running in its low-energy setting.`:"Without the usual schedule to compare against, this shows how the optimised plan spends its energy."}
-function prov(p){$("#prov").textContent=`${p.calls_logged} Muse Spark calls logged (every call is recorded)`}
-function render(r){R=r;hero(r);gantt(r);bytask(r)}
-function add(role,html){const d=document.createElement("div");d.className="m "+(role==="u"?"u":"");d.innerHTML=html;$("#msgs").appendChild(d);$("#msgs").scrollTop=1e9;return d}
-function steps(t){if(!t||!t.length)return"";const items=[];t.forEach(x=>{if(x.tool==="solve_schedule"){const c=x.args&&x.args.constraints||[];items.push(c.length?`Understood your request as: ${esc(describe(c))}`:"No extra condition in your request");
-  const r=x.result||{};items.push(r.ok?`Ran the optimiser (${esc(r.solver_status||"done")}) and verified the plan: ${r.dataset_rule_violations||0} rule violations`:`The optimiser rejected it: ${esc(r.error||"")}`)}else items.push(`Looked at ${esc(JSON.stringify(x.args))}`)});
- return `<ul class="how">${items.map(i=>`<li>${i}</li>`).join("")}</ul><details><summary>Technical details</summary><pre>${esc(JSON.stringify(t.map(x=>({tool:x.tool,args:x.args,result:x.result})),null,1))}</pre></details>`}
-function tag(r){return r.source==="LIVE"?`<span class="tag t-live">● Muse Spark, live</span>`:r.source==="RECORDED"?`<span class="tag t-rec">Muse Spark, recorded earlier</span>`:`<span class="tag t-tpl">Fixed text, model not reached</span>`}
-async function ask(text,preset,context){$("#spin").style.display="inline";if(text)add("u",esc(text));
- try{const r=await (await fetch("/api/ask",{method:"POST",body:JSON.stringify({text,preset,context})})).json();
-  add("a",`${tag(r)}<div>${esc(r.answer)}</div>${steps(r.trace)}`);if(r.result)render(r.result);if(r.provenance)prov(r.provenance)}catch(e){add("a",`Something went wrong: ${esc(e)}`)}
- $("#spin").style.display="none"}
-async function bill(file,name){$("#spin").style.display="inline";add("u",`📷 ${esc(name||file.name||"tariff sheet")}`);
- const b64=await new Promise(res=>{const f=new FileReader();f.onload=()=>res(f.result.split(",")[1]);f.readAsDataURL(file)});
- const r=await (await fetch("/api/bill",{method:"POST",body:JSON.stringify({image_b64:b64,mime:file.type||"image/png"})})).json();$("#spin").style.display="none";
- if(!r.ok){add("a",`Couldn't reach Muse Spark to read the image (${esc(r.error)}).`);return}
- if(r.provenance)prov(r.provenance);
- if(!r.tariff){add("a",`<span class="tag t-live">● Muse Spark, live</span><div>I couldn't read both prices reliably, so I won't use them.</div><details><summary>What it saw</summary><pre>${esc(r.raw)}</pre></details>`);return}
- const m=add("a",`<span class="tag t-live">● Muse Spark vision, live</span><div>I read <b>Rs${r.tariff.peak}</b> at peak and <b>Rs${r.tariff.off}</b> off-peak${r.tariff.window?` (peak ${r.tariff.window[0]}–${r.tariff.window[1]})`:""}. Use these?</div><div style="margin-top:8px"><button class="go">Yes, re-plan with these prices</button></div>`);
- m.querySelector("button").onclick=()=>ask("Re-plan using the prices from my bill, with no other conditions.",null,"Tariff read from the user's bill and sanity-checked: "+JSON.stringify(r.tariff)+". Call solve_schedule with constraints [] and this tariff object.")}
-(async()=>{const s=await (await fetch("/api/state")).json();if(!s.ok){add("a",esc(s.error));return}
- render(s.result);prov(s.provenance);
- const labels={base:["Show the best plan","With no problems, what is the cheapest way to run the line?"],maq119:["A machine breaks down","Machine 119 is out for all of day 3."],peak:["No work in the expensive evening","Nothing may run between 18:30 and 22:30, any day."]};
- Object.entries(s.presets).forEach(([k,t])=>{const b=document.createElement("button");b.innerHTML=`<b>${labels[k][0]}</b><small>${labels[k][1]}</small>`;b.onclick=()=>ask(t,k);$("#scen").appendChild(b)})})();
-$("#send").onclick=()=>{const t=$("#q").value.trim();if(t){$("#q").value="";ask(t,null)}};$("#q").onkeydown=e=>{if(e.key==="Enter")$("#send").click()};
-$("#file").onchange=e=>{if(e.target.files[0])bill(e.target.files[0])};
-$("#sample").onclick=async()=>{const b=await (await fetch("/sample_bill.png")).blob();bill(b,"sample tariff sheet")};
-$("#tb").onclick=()=>{view="baseline";$("#tb").className="on";$("#to").className="";if(R)gantt(R)};$("#to").onclick=()=>{view="optimized";$("#to").className="on";$("#tb").className="";if(R)gantt(R)};
-$("#about").onclick=()=>$("#modal").style.display="flex";$("#closeabout").onclick=()=>$("#modal").style.display="none";$("#modal").onclick=e=>{if(e.target.id==="modal")$("#modal").style.display="none"};
-</script></body></html>
+(() => {
+"use strict";
+
+const $ = id => document.getElementById(id);
+const state = {result:null,view:"optimized",busy:false,presets:{},provenance:null,tariff:null};
+
+const money = n => Number.isFinite(Number(n))
+  ? "Rs " + Number(n).toLocaleString("en-PK",{maximumFractionDigits:0}) : "-";
+const number = (n,d=1) => Number.isFinite(Number(n))
+  ? Number(n).toLocaleString("en-PK",{maximumFractionDigits:d}) : "-";
+
+function toast(msg){
+  const el=$("toast");
+  el.textContent=msg;
+  el.style.display="block";
+  clearTimeout(toast.timer);
+  toast.timer=setTimeout(()=>el.style.display="none",3500);
+}
+function setBusy(v){
+  state.busy=v;
+  $("sendBtn").disabled=v;
+  $("sendBtn").textContent=v?"Working...":"Optimise";
+  $("copilot").classList.toggle("loading",v);
+}
+function addMessage(text,who="bot"){
+  const box=$("messages");
+  const el=document.createElement("div");
+  el.className="message "+who;
+  el.textContent=text||"No explanation was returned.";
+  box.appendChild(el);
+  box.scrollTop=box.scrollHeight;
+}
+async function safeJSON(response){
+  return response.json().catch(()=>({ok:false,error:"The server returned an unreadable response."}));
+}
+async function getJSON(url){
+  const r=await fetch(url,{cache:"no-store"});
+  const j=await safeJSON(r);
+  if(!r.ok)throw new Error(j.error||"Request failed ("+r.status+")");
+  return j;
+}
+async function postJSON(url,data){
+  const r=await fetch(url,{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify(data)
+  });
+  const j=await safeJSON(r);
+  if(!r.ok)throw new Error(j.error||"Request failed ("+r.status+")");
+  return j;
+}
+function resultOf(data){
+  return data?.result||data?.data?.result||data;
+}
+function formatSource(data){
+  const src=(data?.source||data?.result_source||"").toString().toLowerCase();
+  if(src.includes("live"))return "LIVE SOLVE";
+  if(src.includes("cache"))return "CACHED RESULT";
+  if(src.includes("replay"))return "RECORDED REPLAY";
+  if(src.includes("template"))return "DEMO FALLBACK";
+  return src?src.toUpperCase():"BENCHMARK DATA";
+}
+function updateProvenance(p){
+  if(!p)return;
+  state.provenance=p;
+  $("callCount").textContent=(p.calls_logged??0)+" calls";
+  $("connectionLabel").textContent=p.calls_logged
+    ?(p.calls_logged+" model calls  /  "+(p.calls_ok??0)+" successful")
+    :"Demo engine ready";
+}
+function renderResult(r,meta={}){
+  if(!r||!r.optimized){
+    toast("The server did not return a usable schedule.");
+    return;
+  }
+  state.result=r;
+  const b=r.baseline||{},o=r.optimized||{};
+  const saving=Number(r.saving_pct);
+
+  $("savingValue").textContent=Number.isFinite(saving)?number(saving,1)+"%":"N/A";
+  $("savingFoot").textContent=b.cost!=null
+    ?"Compared with same-constraints baseline"
+    :"Baseline was not feasible under these constraints";
+  $("costValue").textContent=money(o.cost);
+  $("energyValue").textContent=number(o.kwh,1)+" kWh";
+  $("peakValue").textContent=number(o.peak_kw,1);
+
+  $("baselineCost").textContent=b.cost!=null?money(b.cost):"Not feasible";
+  $("optimizedCost").textContent=money(o.cost);
+
+  const max=Math.max(Number(b.cost)||0,Number(o.cost)||0,1);
+  $("baselineBar").style.width=(b.cost!=null?Number(b.cost)/max*100:0)+"%";
+  $("optimizedBar").style.width=Math.max(1,Number(o.cost)/max*100)+"%";
+
+  const diff=b.cost!=null?Number(b.cost)-Number(o.cost):NaN;
+  $("savingAmount").textContent=Number.isFinite(diff)?money(diff)+" lower":"-";
+  $("comparisonNote").textContent=b.cost!=null
+    ?"Modelled cost difference"
+    :"No feasible same-constraints baseline available";
+  $("comparisonLabel").textContent=b.cost!=null
+    ?"Baseline vs optimised  /  same constraints"
+    :"Optimised plan  /  baseline infeasible";
+
+  const dv=Number(r.violations_dataset);
+  const uv=Number(r.violations_user);
+  $("datasetViolations").textContent=Number.isFinite(dv)?dv:"-";
+  $("userViolations").textContent=Number.isFinite(uv)?uv:"-";
+
+  const pass=Number.isFinite(dv)&&Number.isFinite(uv)&&dv===0&&uv===0;
+  $("verifyBadge").textContent=pass?"Verified  /  0 violations":"Review required";
+  $("verifyBadge").style.color=pass?"var(--mint)":"var(--amber)";
+  $("verifyNote").textContent=pass
+    ?"The returned schedule reports zero dataset-rule and user-constraint violations. This is benchmark verification, not live factory certification."
+    :"Review the violation counts and solver status before relying on this schedule.";
+
+  $("sourceTag").textContent=formatSource(meta);
+  $("agentMode").textContent=meta.model||formatSource(meta);
+  renderGantt(state.view);
+  renderTrace(meta.trace||[]);
+}
+function escapeHTML(s){
+  return String(s).replace(/[&<>"']/g,c=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[c]));
+}
+function renderGantt(view){
+  const host=$("ganttContainer");
+  const r=state.result;
+  if(!r){host.innerHTML='<div class="empty-state">No schedule loaded.</div>';return;}
+
+  const rows=r.gantt?.[view]||[];
+  if(!Array.isArray(rows)||!rows.length){
+    host.innerHTML='<div class="empty-state">No timeline rows were returned for this schedule.</div>';
+    return;
+  }
+
+  const machines=["MAQ118","MAQ119","MAQ120"];
+  const byMachine=Object.fromEntries(machines.map(m=>[m,[]]));
+
+  rows.forEach(row=>{
+    if(!Array.isArray(row)||row.length<5)return;
+    const [m,task,mode,start,duration]=row;
+    if(!byMachine[m])byMachine[m]=[];
+    byMachine[m].push({
+      task,mode,start:Number(start),duration:Number(duration)
+    });
+  });
+
+  const all=Object.entries(byMachine).filter(([,items])=>items.length);
+  if(!all.length){
+    host.innerHTML='<div class="empty-state">Unexpected schedule format.</div>';
+    return;
+  }
+
+  let out='<div class="gantt"><div class="gantt-axis"><div></div><div class="axis-days">';
+  out+=Array.from({length:6},(_,i)=>`<span>Day ${i+1}</span>`).join("");
+  out+='</div></div>';
+
+  const total=6*192;
+  all.forEach(([machine,items])=>{
+    out+=`<div class="machine-lane"><div class="machine-name">${escapeHTML(machine)}</div><div class="lane-track">`;
+    items.forEach(item=>{
+      const left=Math.max(0,Math.min(100,item.start/total*100));
+      const width=Math.max(.45,Math.min(100-left,item.duration/total*100));
+      const cls=view==="baseline"?"bar alt":"bar";
+      const label=String(item.task||"Task")+"  /  "+String(item.mode||"");
+      const title=`${machine}  /  ${item.task}  /  ${item.mode}  /  start ${item.start}  /  duration ${item.duration}`;
+      out+=`<div class="${cls}" style="left:${left}%;width:${width}%" title="${escapeHTML(title)}" aria-label="${escapeHTML(title)}" tabindex="0">${escapeHTML(label)}</div>`;
+    });
+    out+="</div></div>";
+  });
+  out+="</div>";
+  host.innerHTML=out;
+}
+function renderTrace(trace){
+  const host=$("traceList");
+  if(!Array.isArray(trace)||!trace.length){
+    host.innerHTML='<div class="trace-item">No tool calls recorded for this response.</div>';
+    return;
+  }
+  host.innerHTML="";
+  trace.slice(-5).forEach(item=>{
+    const ok=item.result?.ok;
+    const el=document.createElement("div");
+    el.className="trace-item";
+    const title=document.createElement("strong");
+    title.textContent=item.tool||"Tool call";
+    const status=document.createElement("span");
+    status.className=ok?"ok":"";
+    status.textContent=ok?"  /  completed":"  /  returned error";
+    const detail=document.createElement("div");
+    detail.textContent=item.result?.error||item.result?.solver_status||"Arguments processed";
+    el.append(title,status,detail);
+    host.appendChild(el);
+  });
+}
+async function loadState(){
+  $("refreshBtn").disabled=true;
+  try{
+    const data=await getJSON("/api/state");
+    state.presets=data.presets||{};
+    updateProvenance(data.provenance);
+    const r=resultOf(data);
+    if(r?.optimized){
+      renderResult(r,{
+        source:data.source||"benchmark",
+        trace:data.trace||[],
+        model:data.model
+      });
+    }else if(data.ok===false){
+      throw new Error(data.error||"Could not load initial schedule.");
+    }else{
+      $("ganttContainer").innerHTML='<div class="empty-state">Server ready. Run a scenario to load a schedule.</div>';
+    }
+    if(data.live===false)$("connectionLabel").textContent="Recorded / deterministic mode";
+  }catch(e){
+    $("ganttContainer").innerHTML='<div class="empty-state">Could not load benchmark data: '+escapeHTML(e.message)+'. Check that the Navitas server is running.</div>';
+    toast(e.message);
+  }finally{
+    $("refreshBtn").disabled=false;
+  }
+}
+async function ask(text,preset=null){
+  if(state.busy||!text.trim())return;
+  addMessage(text,"user");
+  $("promptInput").value="";
+  setBusy(true);
+  try{
+    const data=await postJSON("/api/ask",{
+      text,
+      preset,
+      context:"The user is interacting with the Navitas industrial energy optimisation benchmark UI."
+    });
+    updateProvenance(data.provenance);
+
+    if(data.answer)addMessage(data.answer,"bot");
+    else if(data.error)addMessage(data.error,"bot");
+
+    const r=resultOf(data);
+    if(r?.optimized){
+      renderResult(r,{
+        ...data,
+        source:data.source||data.result_source,
+        trace:data.trace||[],
+        model:data.model
+      });
+    }else if(data.result?.optimized){
+      renderResult(data.result,{...data,trace:data.trace||[]});
+    }else if(data.ok===false){
+      addMessage(data.error||"The solver could not produce a schedule.","system");
+    }
+
+    if(data.trace)renderTrace(data.trace);
+  }catch(e){
+    addMessage("I couldn't complete that request: "+e.message,"bot");
+    toast(e.message);
+  }finally{
+    setBusy(false);
+  }
+}
+function presetPrompt(key){
+  const labels={
+    base:"Recalculate the best schedule with no additional constraints",
+    maq119:"Machine 119 is unavailable on day 3",
+    peak:"Avoid all production from 18:30 to 22:30 on every day"
+  };
+  return labels[key]||"Recalculate the schedule";
+}
+async function uploadBill(file){
+  if(!file)return;
+  if(!file.type.startsWith("image/")){
+    toast("Please choose an image file.");
+    return;
+  }
+  $("billResult").textContent="Reading bill image...";
+  try{
+    const b64=await new Promise((resolve,reject)=>{
+      const reader=new FileReader();
+      reader.onload=()=>resolve(String(reader.result).split(",")[1]);
+      reader.onerror=()=>reject(new Error("Could not read image."));
+      reader.readAsDataURL(file);
+    });
+    const data=await postJSON("/api/bill",{
+      image_b64:b64,
+      mime:file.type||"image/png"
+    });
+    updateProvenance(data.provenance);
+    const tariff=data.tariff||null;
+    const fields=tariff?.fields||data.fields||{};
+    if(tariff){
+      state.tariff=tariff;
+      $("billResult").textContent=
+        `Tariff extracted: peak ${fields.peak_rate??tariff.peak??"-"} Rs/kWh  /  off-peak ${fields.offpeak_rate??tariff.off??"-"} Rs/kWh`+
+        (tariff.window?"  /  window "+tariff.window.join("-"):"")+
+        ". Review the values before using them in a production tariff.";
+      toast("Tariff values extracted. Not automatically applied.");
+    }else{
+      $("billResult").textContent=
+        "Image processed, but the backend could not validate a complete tariff. "+
+        (fields.notes||"Check the image and try again.");
+      toast("Could not validate a complete tariff.");
+    }
+  }catch(e){
+    $("billResult").textContent="Bill extraction failed: "+e.message;
+    toast(e.message);
+  }finally{
+    $("billFile").value="";
+  }
+}
+
+document.querySelectorAll(".nav button").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    document.querySelectorAll(".nav button").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    $(btn.dataset.target)?.scrollIntoView({behavior:"smooth",block:"start"});
+  });
+});
+document.querySelectorAll("[data-view]").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    state.view=btn.dataset.view;
+    document.querySelectorAll("[data-view]").forEach(b=>b.classList.toggle("active",b===btn));
+    renderGantt(state.view);
+  });
+});
+document.querySelectorAll("[data-prompt]").forEach(btn=>{
+  btn.addEventListener("click",()=>ask(btn.dataset.prompt));
+});
+document.querySelectorAll("[data-preset]").forEach(btn=>{
+  btn.addEventListener("click",()=>ask(presetPrompt(btn.dataset.preset),btn.dataset.preset));
+});
+$("sendBtn").addEventListener("click",()=>ask($("promptInput").value));
+$("promptInput").addEventListener("keydown",e=>{
+  if(e.key==="Enter")ask($("promptInput").value);
+});
+$("refreshBtn").addEventListener("click",loadState);
+$("billFile").addEventListener("change",e=>uploadBill(e.target.files?.[0]));
+
+loadState();
+})();
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
