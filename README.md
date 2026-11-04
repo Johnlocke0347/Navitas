@@ -77,7 +77,11 @@ Model routing, provider configuration, model restrictions and call-provenance lo
 
 Navitas was evaluated on a real production-line scheduling and energy dataset from GECAD / Polytechnic of Porto, published on Zenodo.
 
-**Headline result: 30.1% median lower modeled electricity cost** at the 1060 machine-capacity setting, compared with the project's tariff-blind fastest-mode baseline under an illustrative Pakistan time-of-use tariff.
+**Two results, with different assumptions.**
+
+**A. Scheduling only, no machine or mode changes: about 5% lower modeled electricity cost** (Rs 33,632 to Rs 31,989, 4.89%) against a tariff-blind, fastest-mode baseline. Every task keeps its baseline machine and mode; only start times move. This needs no assumption about product quality.
+
+**B. With lower-energy modes allowed: about 30% lower** (median 30.1% at the 1060 machine-capacity setting; 23-34% across settings), same baseline, same illustrative Pakistan tariff. Most of this saving (about 94% of the energy saved in the representative run) comes from running two process steps, Harden[1] and Harden[0.5], in their lower-energy machine modes. The dataset contains no product-quality measurements, so we assume those modes make an equivalent product. That is an assumption, not a finding; it needs to be confirmed by the plant that would use them.
 
 ### Pakistan tariff experiment
 
@@ -86,7 +90,15 @@ Navitas was evaluated on a real production-line scheduling and energy dataset fr
 | 1000 | 23.4–24.1% | 23.6% |
 | 1060 | 29.2–30.8% | **30.1%** |
 | 1100 | 33.7–33.9% | 33.9% |
+### Scheduling-only experiment (modes frozen)
 
+| | Baseline | Scheduling only | Modes + scheduling |
+|---|---:|---:|---:|
+| Cost (Rs, 6 days) | 33,632 | 31,989 | 23,522 (median) |
+| Saving | - | 4.89% | 30.06% (29.2-30.8%) |
+| Energy (kWh) | 1,315.7 | 1,315.7 | 923.9 |
+
+Method: every operation keeps its baseline machine and mode (verified: 0 mode changes); only start times change, using a constraint-preserving local search. A CP-SAT run of this variant ran out of memory on our test machine, so 4.89% is a verified feasible result, not a proven optimum, and should be read as a floor. The two savings are not additive: timing is worth more or less depending on which modes are used. Demand response is a separate experiment and is not included here. Files: `results/quality_validation/`.
 ### MIBEL dataset tariff experiment
 
 | Machine capacity | Saving range across 3 seeds | Median saving |
@@ -260,7 +272,8 @@ We believe transparent limitations are essential when evaluating optimization re
 - **Deployment:** Results are benchmark results, not a claim of verified savings at a commercial factory.
 - **Bill-image reading:** Vision has been tested on the synthetic sample tariff sheet in `app/static/sample_bill.png`, not on real electricity bills. Values the model reads are range-checked before they can affect any cost figure, and an unreadable image is reported as unreadable rather than guessed.
 The current system is a decision-support and scheduling prototype. It does not directly control industrial machinery.
-
+- **Production quality:** The dataset contains no product-quality measurements. The GECAD authors confirmed by email that no constraints exist beyond those in the dataset, but that does not show that alternative machine/task modes give equivalent output. Equivalence is assumed. If a plant approves fewer modes, savings fall toward the scheduling-only figure (about 5%).
+  
 ## Commercial direction
 
 Navitas is initially designed around multi-machine textile dyeing and finishing operations, where production can be scheduled across machines and time periods.
@@ -269,6 +282,7 @@ The intended business model is a per-factory setup combined with a share of inde
 
 The longer-term objective is to make industrial energy optimization accessible to manufacturers that cannot afford dedicated optimization and energy-management teams.
 
+No factory pilot has been run yet; the first step is a pilot with a mill that can provide a week of schedule and meter data and a list of approved modes.
 ## Project structure
 
 ```text
