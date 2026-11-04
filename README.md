@@ -258,7 +258,7 @@ We believe transparent limitations are essential when evaluating optimization re
 - **Baseline:** The comparison baseline is the project's tariff-blind, fastest-mode, earliest-deadline-first schedule.
 - **Optimality:** A feasible schedule is not necessarily a proven global optimum. The reported experiments include non-zero optimality gaps; the proof document provides the relevant solver details.
 - **Deployment:** Results are benchmark results, not a claim of verified savings at a commercial factory.
-
+- **Bill-image reading:** Vision has been tested on the synthetic sample tariff sheet in `app/static/sample_bill.png`, not on real electricity bills. Values the model reads are range-checked before they can affect any cost figure, and an unreadable image is reported as unreadable rather than guessed.
 The current system is a decision-support and scheduling prototype. It does not directly control industrial machinery.
 
 ## Commercial direction
