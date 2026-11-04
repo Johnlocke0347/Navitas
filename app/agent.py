@@ -184,7 +184,7 @@ def extract_tariff(image_bytes, mime="image/png"):
     b64 = base64.b64encode(image_bytes).decode()
     msgs = [{"role": "user", "content": [{"type": "text", "text": BILL_PROMPT}, {"type": "image_url", "image_url": {"url": f"data:{mime};base64,{b64}"}}]}]
     try:
-        resp = llm.chat(msgs, role="agent", max_tokens=700, temperature=0.0, timeout=CALL_TIMEOUT_S * 2)
+        resp = llm.chat(msgs, role="agent", max_tokens=4000, temperature=0.0, timeout=CALL_TIMEOUT_S * 2)
     except Exception as e:
         raise AgentUnavailable(f"{type(e).__name__}: {str(e)[:160]}")
     raw = (resp.choices[0].message.content or "").strip()
